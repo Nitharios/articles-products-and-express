@@ -3,10 +3,6 @@ const sanity = "You're not crazy!";
 console.log(sanity);
 
 const express = require('express');
-const hbs = require('express-handlebars');
-const path = require('path');
-const fs = require('fs');
-
 const products = require('./routes/products');
 const articles = require('./routes/articles');
 

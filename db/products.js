@@ -1,4 +1,6 @@
 /* jshint esversion:6 */
+const validReq = { "success" : true };
+const invalidReq = { "success" : false };
 
 class Products {
   constructor() {
@@ -6,11 +8,11 @@ class Products {
   }
 
   verify(req) {
-    
+
   }
 
   create(req) {
-
+    
   }
 } 
 
