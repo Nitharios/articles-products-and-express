@@ -9,10 +9,11 @@ const products = new Products();
 router.route('/')
   .get((req, res) => {
   res.render(/*../views/products.hbs*/);
-})
+  })
 
   .post((req, res) => {
-  product.create(req);
-});
+    console.log(req.body);
+    products.create(req);
+  });
 
 module.exports = router;
