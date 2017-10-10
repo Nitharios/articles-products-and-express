@@ -26,12 +26,15 @@ router.route('/:title')
 
   .put((req, res) => {
     let articleTitle = req.body.title;
-    let targetItem = articles.find(articleTitle);
 
-    if (targetItem) {
+    if (articles.find(articleTitle)) {
+      let targetItem = articles.find(articleTitle);
+      
       articles.edit(req.body, targetItem);
       return res.json(validReq);
+      
     } else {
+
       return res.json(invalidReq)/*res.redirect('/articles/${title}/edit')*/;
     }
   })
@@ -40,10 +43,14 @@ router.route('/:title')
     let articleTitle = req.body.title;
 
     if (articles.find(articleTitle)) {
+
       articles.remove(articleTitle);
       return res.json(validReq);
 
-    } else res.json(invalidReq); 
+    } else {
+
+      return res.json(invalidReq); 
+    }
   });
 
 module.exports = router;
