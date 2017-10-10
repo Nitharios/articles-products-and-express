@@ -7,11 +7,11 @@ class Products {
     this._productList = {};
     this._productNumber = 0;
   }
-  // will return full productlist
+  // will return full product list
   listAll () {
     return this._productList;
   }
-  // will save data from req body
+  // will save data from req.body
   create(data) {
 
     let productInfo = {
@@ -42,6 +42,11 @@ class Products {
     if (data.inventory) item.inventory = data.inventory;
 
     return item;
+  }
+
+  // will delete a product based on id
+  remove(id) {
+    if (this._productList.hasOwnProperty(id)) this._productList[id] = {};
   }
 } 
 

@@ -16,7 +16,8 @@ router.route('/')
 
   .post((req, res) => {
     console.log(req.body);
-    
+
+    // will eventually handle routes
     if (products.create(req.body)) return res.json(validReq);
     else return res.json(invalidReq);
   });
@@ -35,7 +36,9 @@ router.route('/:id')
   })
 
   .delete((req, res) => {
+    let id = req.url.split('/')[1];
 
+    products.remove(id);
   });
 
 module.exports = router;
