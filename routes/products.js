@@ -25,7 +25,7 @@ router.route('/')
 
 router.route('/:id')
   .get((req, res) => {
-    res.render(''/*../views/product.hbs*/);
+    res.render(/*../views/product.hbs*/);
   })
 
   .put((req, res) => {
