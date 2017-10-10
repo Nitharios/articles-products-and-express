@@ -8,14 +8,18 @@ const articles = new Articles();
 
 router.route('/')
   .get((req, res) => {
-    res.render(/*../views/articles.hbs*/);
+    res.render(/*../views/index.hbs*/);
   })
 
   .post((req, res) => {
-    res.send('Hello World!');
+    if (articles.create(req.body)) return res.redirect('/articles');
+    else return res.redirect('/articles/new');
   });
 
 router.route('/:title')
+  .get((req, res) => {
+    res.render(/*../views/article.hbs*/);
+  })
   .put((req, res) => {
     res.send('Hello World');
   })

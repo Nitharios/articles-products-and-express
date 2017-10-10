@@ -2,15 +2,22 @@
 
 class Articles {
   constructor() {
-
+    this._articleList = {};
+    this._productNumber = 0;
   }
 
-  verify(req) {
+  create(data) {
 
-  }
+    let articleInfo = {
+      title : data.title,
+      body : data.body,
+      author : data.author,
+      urlTitle : encodeURI(data.title)
+    };
 
-  create(req) {
-
+    this._articleList[articleInfo.title] = articleInfo;
+    console.log('articleList', this._articleList);
+    return true;
   }
 }
 
