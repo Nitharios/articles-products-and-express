@@ -44,7 +44,7 @@ Each of your resources will have it's own module in charge of it's own data. Thi
   - The incoming request will look like this: `{ id: Number, ... }`
     - `...` represents a field to be edited for example: if the server was sent `{ id: 12, name: "Water Bed" }` the server will find the product with an **id** of **12** and change the `name` property to be `"Water Bed"`.
     - If **successful** then redirect the user back to the `/products/:id` route, where `:id` is the product that was just edited, so that they can see the updated resource.
-    - If not **successful** then send the user back to the **new** article route, `/products/:id/edit` and some way to communicate the error back to the user via templating.
+    - If not **successful** then send the user back to the **new** product route, `/products/:id/edit` and some way to communicate the error back to the user via templating.
 
 `/products/:id`
 - `DELETE` removes a product by it's **id**.
