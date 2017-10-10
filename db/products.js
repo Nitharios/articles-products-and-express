@@ -36,12 +36,12 @@ class Products {
   }
 
   // will edit a product based on id
-  edit(data, newInfo) {
-    if (data.name) newInfo.name = data.name;
-    if (data.price) newInfo.price = data.price;
-    if (data.inventory) newInfo.inventory = data.inventory;
+  edit(data, item) {
+    if (data.name) item.name = data.name;
+    if (data.price) item.price = data.price;
+    if (data.inventory) item.inventory = data.inventory;
 
-    return newInfo;
+    return item;
   }
 } 
 
