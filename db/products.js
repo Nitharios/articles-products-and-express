@@ -33,6 +33,7 @@ class Products {
   // will return reference to location of id through coersion
   find(id) {
     if (this._productList.hasOwnProperty(id)) return this._productList[id];
+    else return false;
   }
 
   // will edit a product based on id
@@ -41,12 +42,19 @@ class Products {
     if (data.price) item.price = data.price;
     if (data.inventory) item.inventory = data.inventory;
 
-    return item;
+    return true;
   }
 
   // will delete a product based on id
   remove(id) {
-    if (this._productList.hasOwnProperty(id)) this._productList[id] = {};
+    if (this._productList.hasOwnProperty(id)) {
+      this._productList[id] = {};
+      return true;
+
+    } else {
+     
+      return false;
+    }
   }
 } 
 

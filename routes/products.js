@@ -9,6 +9,7 @@ const products = new Products();
 const validReq = { "success" : true };
 const invalidReq = { "success" : false };
 
+// NEED TO USE PATH AND JOIN AND __dir FOR CROSS-PLATFORM
 router.route('/')
   .get((req, res) => {
   res.render(/*../views/products.hbs*/);
@@ -18,8 +19,8 @@ router.route('/')
     console.log(req.body);
 
     // will eventually handle routes
-    if (products.create(req.body)) return res.json(validReq);
-    else return res.json(invalidReq);
+    if (products.create(req.body)) return res.redirect('/products');
+    else return res.json('/products/new');
   });
 
 router.route('/:id')
@@ -29,16 +30,18 @@ router.route('/:id')
 
   .put((req, res) => {
     let id = req.url.split('/')[1];
-    let newInfo = products.find(id);
+    let targetItem = products.find(id);
 
-    products.edit(req.body, newInfo);
+    if (products.edit(req.body, targetItem)) return res.redirect(`/products/${id}`);
+    else return res.redirect(`/products/${id}/edit`);
     // console.log(products.listAll());
   })
 
   .delete((req, res) => {
     let id = req.url.split('/')[1];
 
-    products.remove(id);
+    if (products.remove(id)) return res.redirect('/products');
+    else return res.redirect(`/products/${id}`);
   });
 
 module.exports = router;
