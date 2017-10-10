@@ -16,4 +16,17 @@ router.route('/')
     products.create(req);
   });
 
+router.route('/:id')
+  .get((req, res) => {
+    res.render(/*../views/products.hbs*/);
+  })
+
+  .put((req, res) => {
+
+  })
+
+  .delete((req, res) => {
+    
+  })
+
 module.exports = router;

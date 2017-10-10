@@ -2,7 +2,8 @@
 const validReq = { "success" : true };
 const invalidReq = { "success" : false };
 
-let productsArr = [];
+let productId = {};
+let productNumber = 0;
 
 class Products {
   constructor() {
@@ -14,14 +15,20 @@ class Products {
   // will save data from req body
   create(req) {
 
-    let tempProduct = {
-      id : productsArr.length,
+    let productInfo = {
       name : req.body.name,
       price : Number(req.body.price),
       inventory : Number(req.body.inventory)
     };
 
-    productsArr.push(tempProduct);
+    productNumber++;
+    productId[productNumber] = productInfo;
+  }
+
+  // will edit a product based on id
+  edit(req) {
+
+
   }
 } 
 
