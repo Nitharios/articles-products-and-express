@@ -30,11 +30,15 @@ class Articles {
       item.urlTitle = encodeURI(data.title);
     }
       
-    if (data.body) item.body = author.body;
+    if (data.body) item.body = data.body;
     if (data.author) item.author = data.author;
   
     console.log(this._articleList);
     return true;
+  }
+
+  remove(title) {
+    this._articleList[title] = {};
   }
 }
 

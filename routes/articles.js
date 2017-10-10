@@ -37,7 +37,13 @@ router.route('/:title')
   })
 
   .delete((req, res) => {
-    res.send('Hello World!');
+    let articleTitle = req.body.title;
+
+    if (articles.find(articleTitle)) {
+      articles.remove(articleTitle);
+      return res.json(validReq);
+
+    } else res.json(invalidReq); 
   });
 
 module.exports = router;
