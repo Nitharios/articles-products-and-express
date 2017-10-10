@@ -3,12 +3,9 @@
 class Articles {
   constructor() {
     this._articleList = {};
-    this._productNumber = 0;
   }
 
   create(data) {
-    if (this.find(data.title)) return false;
-
     let articleInfo = {
       title : data.title,
       body : data.body,
@@ -36,6 +33,7 @@ class Articles {
     if (data.body) item.body = author.body;
     if (data.author) item.author = data.author;
   
+    console.log(this._articleList);
     return true;
   }
 }

@@ -21,16 +21,18 @@ router.route('/')
 
 router.route('/:title')
   .get((req, res) => {
-    res.render(/*../views/article.hbs*/);
+    res.render(''/*../views/article.hbs*/);
   })
 
   .put((req, res) => {
     let articleTitle = req.body.title;
+    let targetItem = articles.find(articleTitle);
 
-    if (articles.find(articleTitle)) {
-      articles.edit(req.body, articleTitle);
+    if (targetItem) {
+      articles.edit(req.body, targetItem);
+      return res.json(validReq);
     } else {
-      return res.redirect('/articles/${title}/edit');
+      return res.json(invalidReq)/*res.redirect('/articles/${title}/edit')*/;
     }
   })
 
