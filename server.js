@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 const products = require('./routes/products');
+const articles = require('./routes/articles');
 
 const port = process.env.PORT || 8888;
 
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/products', products);
+app.use('/articles', articles);
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);

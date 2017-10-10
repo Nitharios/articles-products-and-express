@@ -1,17 +1,17 @@
 /* jshint esversion:6 */
 
-class Products {
+class Articles {
   constructor() {
 
   }
 
   verify(req) {
-    
+
   }
 
   create(req) {
 
   }
-} 
+}
 
-module.exports = Products;
+module.exports = Articles;
