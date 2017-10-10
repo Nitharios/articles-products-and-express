@@ -13,16 +13,13 @@ class Products {
   }
   // will save data from req.body
   create(data) {
+    if (this._productList.hasOwnProperty(data.name)) return false;
 
     let productInfo = {
       name : data.name,
       price : Number(data.price),
       inventory : Number(data.inventory)
     };
-
-    for (let i in this._productList) {
-      if (this._productList[i].name === productInfo.name) return false;
-    }
 
     this._productNumber += 1;
     this._productList[this._productNumber] = productInfo;
