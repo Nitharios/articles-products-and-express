@@ -1,7 +1,6 @@
 /* jshint esversion:6 */
 const express = require('express');
 const router = express.Router();
-const methodOverride = require('method-override');
 
 const Products = require('../db/products');
 const products = new Products();
@@ -44,14 +43,14 @@ router.route('/:id')
     console.log(targetItem);
 
     if (targetItem) { 
-      res.render('index', { 
+      return res.render('index', { 
         products : {
           item : targetItem 
         }
     });
     // I bet this will break...I think I'm wrong
     } else {
-      res.redirect(`/products/${id}/edit`);
+      return res.redirect(`/products/${id}/edit`);
     }
   });
 
@@ -61,7 +60,7 @@ router.route('/:id/edit')
     let targetItem = products.find(id);
 
     if (targetItem) { 
-      res.render('index', {
+      return res.render('index', {
         products : {
           edit : true,
           id : id,
