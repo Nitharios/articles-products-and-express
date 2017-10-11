@@ -29,14 +29,15 @@ class Products {
   create(data) {
     if (this._productList.hasOwnProperty(data.name)) return false;
 
+    this._productNumber += 1;
+
     let productInfo = {
-      id : this._productNumber++,
+      id : this._productNumber,
       name : data.name,
       price : Number(data.price),
       inventory : Number(data.inventory)
     };
 
-    this._productNumber += 1;
     this._productList[this._productNumber] = productInfo;
     console.log(this._productList);
     return true;

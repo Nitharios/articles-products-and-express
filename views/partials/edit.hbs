@@ -1,10 +1,15 @@
 <h1>Edit Product</h1>
 
 {{!-- products.item --}}
-<form action="/action_page.php">
+<form action="/products/{{products.id}}/edit" method="PUT">
   Name: <input type="text" name="name" value="{{products.item.name}}"><p>
   Price: <input type="text" name="price" value="{{products.item.price}}"><p>
   Inventory: <input type="text" name="inventory" value="{{products.item.inventory}}"><p>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="EDIT">
 </form> 
+
+<h1>Delete Product</h1>
+<form action="products/{{products.id}}/edit" method="DELETE">
+  <input type="submit" value="DELETE">
+</form>
