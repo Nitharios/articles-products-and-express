@@ -19,7 +19,7 @@ class Products {
         'inventory' : 5
       }
     };
-    this._productNumber = 0;
+    this._productNumber = 2;
   }
   // will return full product list
   listAll () {
