@@ -29,7 +29,7 @@ router.route('/new')
 
   .post((req, res) => {
     if (articles.create(req.body)) return res.redirect('/articles')/*res.redirect('/articles')*/;
-    else return res.json('/articles/new')/*res.redirect('/articles/new')*/;
+    else return res.redirect('/articles/new')/*res.redirect('/articles/new')*/;
   });
 
 router.route('/:title')
@@ -83,8 +83,8 @@ router.route('/:title/edit')
   .delete((req, res) => {
     let title = req.params.title;
 
-    if (articles.remove(articleTitle)) return res.redirect('/articles');
-    else return res.redirect(`/articles/${id}`); 
+    if (articles.remove(title)) return res.redirect('/articles');
+    else return res.redirect(`/articles/${title}`); 
   });
 
 module.exports = router;
