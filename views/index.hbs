@@ -2,18 +2,18 @@
   
   {{#if products.list}}
 
-    {{> listProducts}}
+    {{> products/listProducts}}
 
   {{else if products.new}}
 
-    {{> new}}
+    {{> products/new}}
 
   {{else if products.item}}
 
-    {{> product}}
+    {{> products/product}}
 
     {{#if products.edit}}
-      {{> edit}}
+      {{> products/edit}}
     {{/if}}
 
   {{/if}}
@@ -22,7 +22,7 @@
   
   {{#if articles.list}}
 
-    {{> listArticles}}
+    {{> articles/listArticles}}
 
   {{else if articles.new}}
 
@@ -30,7 +30,7 @@
 
   {{else if articles.item}}
 
-    {{> article}}
+    {{> articles/article}}
 
     {{#if articles.edit}}
       {{> articles/edit}}

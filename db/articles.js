@@ -9,6 +9,13 @@ class Articles {
         author : 'Somebody',
         urlTitle : 'Summertime%20Is%20For%20Everyone'
       },
+
+      'Climate Change Is Real' : {
+        title : 'Climate Change Is Real',
+        body : 'IT IS REAL!',
+        author : 'Scientist',
+        urlTitle : 'Climate%20Change%20Is%20Real'
+      }
     };
   }
 
@@ -49,7 +56,14 @@ class Articles {
   }
 
   remove(title) {
-    this._articleList[title] = {};
+    if (this._articleList.hasOwnProperty(title)) {
+      this._articleList[title] = {};
+      return true;
+
+    } else {
+     
+      return false;
+    }
   }
 }
 
