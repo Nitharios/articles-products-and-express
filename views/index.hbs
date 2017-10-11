@@ -1,9 +1,10 @@
+{{!-- if the object passed in has they key 'products' --}}
 {{#if products}}
-  
+  {{!-- if 'products' has a key called 'list' --}}
   {{#if products.list}}
-
+    {{!-- looks in 'partials' directory for 'products' directory and the file 'listProducts' --}}
     {{> products/listProducts}}
-
+  {{!-- if 'products' has a key called 'new' --}}
   {{else if products.new}}
 
     {{> products/new}}
