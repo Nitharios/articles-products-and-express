@@ -1,7 +1,6 @@
 /* jshint esversion:6 */
 const express = require('express');
 const router = express.Router();
-const hbs = require('express-handlebars');
 
 const Articles = require('../db/articles');
 const articles = new Articles();
