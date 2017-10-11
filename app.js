@@ -4,6 +4,7 @@ console.log(sanity);
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const hbs = require('express-handlebars');
 const products = require('./routes/products');
 const articles = require('./routes/articles');
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(bodyParser.urlencoded({ "extended" : true }));
+app.use(methodOverride('_method'));
 
 app.use('/products', products);
 app.use('/articles', articles);

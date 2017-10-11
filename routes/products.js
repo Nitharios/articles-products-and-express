@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
 const express = require('express');
 const router = express.Router();
-const hbs = require('express-handlebars');
+const methodOverride = require('method-override');
 
 const Products = require('../db/products');
 const products = new Products();
@@ -49,7 +49,7 @@ router.route('/:id')
           item : targetItem 
         }
     });
-    // I bet this will break
+    // I bet this will break...I think I'm wrong
     } else {
       res.redirect(`/products/${id}/edit`);
     }

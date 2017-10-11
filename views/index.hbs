@@ -11,7 +11,10 @@
   {{else if products.item}}
 
     {{> product}}
-    {{> edit}}
+
+    {{#if products.edit}}
+      {{> edit}}
+    {{/if}}
 
   {{/if}}
 
