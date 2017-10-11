@@ -4,5 +4,9 @@
   Title: {{articles.item.title}}<br> 
   Body: {{articles.item.body}}<br>
   Author: {{articles.item.author}}<br>
-  urlTitle: {{articles.item.urlTitle}}
 </h4>
+
+<p>
+<form action="" method="get">
+  <input type="submit" formaction="/articles/{{articles.item.title}}/edit" value="EDIT">
+</form>
