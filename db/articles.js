@@ -2,7 +2,18 @@
 
 class Articles {
   constructor() {
-    this._articleList = {};
+    this._articleList = {
+      'Summertime' : {
+        title : 'Summertime Is For Everyone',
+        body : 'Summertime is for everyone!',
+        author : 'Somebody',
+        urlTitle : 'Summertime%20Is%20For%20Everyone'
+      },
+    };
+  }
+
+  listAll() {
+    return this._articleList;
   }
 
   create(data) {

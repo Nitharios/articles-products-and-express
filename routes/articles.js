@@ -11,7 +11,11 @@ const invalidReq = { "success" : false };
 
 router.route('/')
   .get((req, res) => {
-    res.render('index', { articles : true });
+    res.render('index', { 
+      articles : {
+        list : articles.listAll() 
+      }
+    });
   })
 
   .post((req, res) => {
