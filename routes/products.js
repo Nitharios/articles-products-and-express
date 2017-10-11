@@ -52,6 +52,22 @@ router.route('/:id')
     } else {
       return res.redirect(`/products`);
     }
+  })
+
+  .put((req, res) => {
+    let id = req.params.id;
+    let targetItem = products.find(id);
+
+    if (products.edit(req.body, targetItem)) return res.redirect(`/products/${id}`);
+    else return res.redirect(`/products/${id}/edit`);
+    // console.log(products.listAll());
+  })
+
+  .delete((req, res) => {
+    let id = req.params.id;
+
+    if (products.remove(id)) return res.redirect('/products');
+    else return res.redirect(`/products/${id}`);
   });
 
 router.route('/:id/edit')
@@ -72,22 +88,7 @@ router.route('/:id/edit')
 
       return res.redirect(`/products/${id}`);
     }
-  })
-
-  .put((req, res) => {
-    let id = req.params.id;
-    let targetItem = products.find(id);
-
-    if (products.edit(req.body, targetItem)) return res.redirect(`/products/${id}`);
-    else return res.redirect(`/products/${id}/edit`);
-    // console.log(products.listAll());
-  })
-
-  .delete((req, res) => {
-    let id = req.params.id;
-
-    if (products.remove(id)) return res.redirect('/products');
-    else return res.redirect(`/products/${id}`);
   });
+
 
 module.exports = router;

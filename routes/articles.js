@@ -48,6 +48,21 @@ router.route('/:title')
     } else {
       return res.redirect(`/articles`);
     }
+  })
+
+  .put((req, res) => {
+    let title = req.params.title;
+    let targetItem = articles.find(title);
+
+    if (articles.edit(req.body, targetItem)) return res.redirect(`/articles/${title}`);
+    else return res.redirect(`/articles/${title}/edit`);
+  })
+
+  .delete((req, res) => {
+    let title = req.params.title;
+
+    if (articles.remove(title)) return res.redirect('/articles');
+    else return res.redirect(`/articles/${title}`); 
   });
 
 router.route('/:title/edit')
@@ -69,21 +84,7 @@ router.route('/:title/edit')
 
       return res.redirect(`/articles/${title}`);
     }
-  })
-
-  .put((req, res) => {
-    let title = req.params.title;
-    let targetItem = articles.find(title);
-
-    if (articles.edit(req.body, targetItem)) return res.redirect(`/articles/${title}`);
-    else return res.redirect('/articles/${title}/edit');
-  })
-
-  .delete((req, res) => {
-    let title = req.params.title;
-
-    if (articles.remove(title)) return res.redirect('/articles');
-    else return res.redirect(`/articles/${title}`); 
   });
+
 
 module.exports = router;
