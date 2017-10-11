@@ -4,14 +4,16 @@
 
     {{> listProducts}}
 
+  {{else if products.new}}
+
+    {{> new}}
+
   {{else if products.item}}
 
     {{> product}}
 
     {{#if products.edit}}
-
       {{> edit}}
-
     {{/if}}
 
   {{/if}}

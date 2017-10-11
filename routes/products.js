@@ -19,8 +19,18 @@ router.route('/')
       } 
 
     });
-  })
+  });
 
+router.route('/new')
+  .get((req, res) => {
+    res.render('index', {
+
+      products : {
+        new : true
+      }
+    });
+  })
+  
   .post((req, res) => {
     console.log(req.body);
 
