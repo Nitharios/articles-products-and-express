@@ -12,11 +12,12 @@ const invalidReq = { "success" : false };
 // NEED TO USE PATH AND JOIN AND __dir FOR CROSS-PLATFORM
 router.route('/')
   .get((req, res) => {
-    res.render('index', { products : {
+    res.render('index', { 
 
-      list : products.listAll()
-
+      products : {
+        list : products.listAll()
       } 
+
     });
   })
 
@@ -24,26 +25,27 @@ router.route('/')
     console.log(req.body);
 
     // will eventually handle routes
-    if (products.create(req.body)) return res.redirect(200, '/products');
-    else return res.redirect(200, '/products/new');
+    if (products.create(req.body)) return res.redirect('/products');
+    else return res.redirect('/products/new');
   });
 
 router.route('/:id')
   .get((req, res) => {
-    let id = req.url.split('/')[1];
+    let id = req.params.id;
     console.log(id);
     let targetItem = products.find(id);
     console.log(targetItem);
 
-    if (targetItem) { res.render('index', { products : {
-
-      item : targetItem 
-
+    if (targetItem) { res.render('index', { 
+      
+      products : {
+        item : targetItem 
       }
+
     });
     // I bet this will break
     } else {
-      res.redirect(404, '/products');
+      res.redirect('/products');
     }
   })
 
@@ -51,16 +53,31 @@ router.route('/:id')
     let id = req.body.id;
     let targetItem = products.find(id);
 
-    if (products.edit(req.body, targetItem)) return res.redirect(200, `/products/${id}`);
-    else return res.redirect(200, `/products/${id}/edit`);
+    if (products.edit(req.body, targetItem)) return res.redirect(`/products/${id}`);
+    else return res.redirect(`/products/${id}/edit`);
     // console.log(products.listAll());
   })
 
   .delete((req, res) => {
-    let id = req.url.split('/')[1];
+    let id = req.params.id;
 
-    if (products.remove(id)) return res.redirect(200, '/products');
-    else return res.redirect(200, `/products/${id}`);
+    if (products.remove(id)) return res.redirect('/products');
+    else return res.redirect(`/products/${id}`);
+  });
+
+router.route('/:id/edit')
+  .get((req, res) => {
+    let id = req.params.id;
+    let targetItem = products.find(id);
+
+    if (targetItem) res.render('index', {
+
+      products : {
+        edit : true,
+        item : targetItem
+      }
+
+    });
   });
 
 module.exports = router;
