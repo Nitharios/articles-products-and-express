@@ -8,6 +8,12 @@
 
     {{> product}}
 
+    {{#if products.edit}}
+
+      {{> edit}}
+
+    {{/if}}
+
   {{/if}}
 
 {{else if articles}}
