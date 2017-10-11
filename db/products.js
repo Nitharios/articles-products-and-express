@@ -23,7 +23,6 @@ class Products {
   }
   // will return full product list
   listAll () {
-    console.log('here', this._productList);
     return this._productList;
   }
   // will save data from req.body

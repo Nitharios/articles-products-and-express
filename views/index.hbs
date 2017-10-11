@@ -1,7 +1,14 @@
 {{#if products}}
-  <h1>Products</h1>
   
-  {{> listProducts}}
+  {{#if products.list}}
+
+    {{> listProducts}}
+
+  {{else if products.item}}
+
+    {{> product}}
+
+  {{/if}}
 
 {{else if articles}}
   <h1>Articles</h1>
