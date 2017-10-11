@@ -8,10 +8,10 @@
 
   <input type="submit" value="EDIT">
 </form> 
-<!-->creates a form to delete a specific item</!-->
+<!-- creates a form to delete a specific item -->
 <h1>Delete Article</h1>
 <form action="/articles/{{articles.title}}/edit?_method=DELETE" method="POST">
-  <!-->'disabled' will prevent the user from editing the ID field</!-->
+  <!-- 'disabled' will prevent the user from editing the ID field -->
   ID: <input type="text" name="name" value="{{articles.item.title}}" disabled><p>
   <input type="submit" value="DELETE">
 </form>
