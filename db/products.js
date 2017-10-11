@@ -4,11 +4,26 @@
 
 class Products {
   constructor() {
-    this._productList = {};
+    this._productList = {
+      '1' : {
+        'id' : '1',
+        'name' : 'potato chips',
+        'price' : 2,
+        'inventory' : 20
+      },
+
+      '2' : {
+        'id' : '2',
+        'name' : 'watermelon',
+        'price' : 10,
+        'inventory' : 5
+      }
+    };
     this._productNumber = 0;
   }
   // will return full product list
   listAll () {
+    console.log('here', this._productList);
     return this._productList;
   }
   // will save data from req.body

@@ -12,7 +12,7 @@ const invalidReq = { "success" : false };
 // NEED TO USE PATH AND JOIN AND __dir FOR CROSS-PLATFORM
 router.route('/')
   .get((req, res) => {
-    res.render('index', { products : req.baseUrl });
+    res.render('index', { products : products.listAll() });
   })
 
   .post((req, res) => {
