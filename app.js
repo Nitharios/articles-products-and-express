@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(bodyParser.urlencoded({ "extended" : true }));
-// applies the methodOverride method to the method assigned to _method in the URL of a form submission page
+// applies methodOverride to the method assigned to _method in the URL of a form submission page
 app.use(methodOverride('_method'));
 
 app.use('/products', products);
