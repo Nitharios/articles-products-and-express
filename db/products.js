@@ -30,6 +30,7 @@ class Products {
     if (this._productList.hasOwnProperty(data.name)) return false;
 
     let productInfo = {
+      id : this._productNumber++,
       name : data.name,
       price : Number(data.price),
       inventory : Number(data.inventory)
