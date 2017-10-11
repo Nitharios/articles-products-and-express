@@ -1,9 +1,22 @@
 {{#if products}}
   <h1>Products</h1>
-  {{#each products}}
-    <h4>ID: {{id}}, Name: {{name}}, Price: {{price}}, Inventory: {{inventory}}</h4>
-  {{/each}}
+
+  <ul>
+    {{#each products}}
+      <li>
+        <h4>ID: {{id}}, Name: {{name}}, Price: {{price}}, Inventory: {{inventory}}</h4>            
+      </li>
+    {{/each}}
+  </ul>
+
 {{else if articles}}
   <h1>Articles</h1>
+  <ul>
+    {{#each articles}}
+      <li>
+        <h4>Title: {{title}}, Body: {{body}}, Author: {{author}}, urlTitle: {{urlTitle}}</h4>
+      </li>
+  {{/each}}    
+  </ul>
 
 {{/if}}
