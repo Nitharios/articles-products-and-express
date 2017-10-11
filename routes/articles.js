@@ -16,45 +16,75 @@ router.route('/')
         list : articles.listAll() 
       }
     });
+  });
+
+router.route('/new')
+  .get((req, res) => {
+    res.render('index', { 
+      articles : {
+        new : true 
+      }
+    });
   })
 
   .post((req, res) => {
-    if (articles.create(req.body)) return res.json(validReq)/*res.redirect('/articles')*/;
-    else return res.json(invalidReq)/*res.redirect('/articles/new')*/;
+    if (articles.create(req.body)) return res.redirect('/articles')/*res.redirect('/articles')*/;
+    else return res.json('/articles/new')/*res.redirect('/articles/new')*/;
   });
 
 router.route('/:title')
   .get((req, res) => {
-    res.render(''/*../views/article.hbs*/);
+    let title = req.params.title;
+    console.log(title);
+    let targetItem = articles.find(title);
+    console.log(targetItem);
+
+    if (targetItem) { 
+      return res.render('index', { 
+        articles : {
+          item : targetItem 
+        }
+    });
+    // I bet this will break...I think I'm wrong
+    } else {
+      return res.redirect(`/articles`);
+    }
+  });
+
+router.route('/:title/edit')
+  .get((req, res) => {
+    let title = req.params.title;
+    let targetItem = articles.find(title);
+    console.log(targetItem);
+
+    if (targetItem) { 
+      return res.render('index', { 
+        articles : {
+          edit: true,
+          title : title,
+          item : targetItem 
+        }
+    });
+    // I bet this will break...I think I'm wrong
+    } else {
+
+      return res.redirect(`/articles/${title}`);
+    }
   })
 
   .put((req, res) => {
-    let articleTitle = req.body.title;
+    let title = req.params.title;
+    let targetItem = articles.find(title);
 
-    if (articles.find(articleTitle)) {
-      let targetItem = articles.find(articleTitle);
-      
-      articles.edit(req.body, targetItem);
-      return res.json(validReq);
-      
-    } else {
-
-      return res.json(invalidReq)/*res.redirect('/articles/${title}/edit')*/;
-    }
+    if (articles.edit(req.body, targetItem)) return res.redirect(`/articles/${title}`);
+    else return res.redirect('/articles/${title}/edit');
   })
 
   .delete((req, res) => {
-    let articleTitle = req.body.title;
+    let title = req.params.title;
 
-    if (articles.find(articleTitle)) {
-
-      articles.remove(articleTitle);
-      return res.json(validReq);
-
-    } else {
-
-      return res.json(invalidReq); 
-    }
+    if (articles.remove(articleTitle)) return res.redirect('/articles');
+    else return res.redirect(`/articles/${id}`); 
   });
 
 module.exports = router;

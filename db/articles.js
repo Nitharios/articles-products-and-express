@@ -3,7 +3,7 @@
 class Articles {
   constructor() {
     this._articleList = {
-      'Summertime' : {
+      'Summertime Is For Everyone' : {
         title : 'Summertime Is For Everyone',
         body : 'Summertime is for everyone!',
         author : 'Somebody',

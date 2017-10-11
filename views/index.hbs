@@ -19,7 +19,23 @@
   {{/if}}
 
 {{else if articles}}
-  <h1>Articles</h1>
+  
+  {{#if articles.list}}
 
-  {{> listArticles}}
+    {{> listArticles}}
+
+  {{else if articles.new}}
+
+    {{> new}}
+
+  {{else if articles.item}}
+
+    {{> article}}
+
+    {{#if articles.edit}}
+      {{> edit}}
+    {{/if}}
+
+  {{/if}}
+
 {{/if}}

@@ -1,0 +1,16 @@
+<h1>Edit Article</h1>
+
+{{!-- articles. --}}
+<form action="/articles/{{articles.title}}/edit?_method=PUT" method="POST">
+  Title: <input type="text" name="title" value="{{articles.item.title}}"><p>
+  Body: <input type="text" name="body" value="{{articles.item.body}}"><p>
+  Author: <input type="text" name="author" value="{{articles.item.author}}"><p>
+
+  <input type="submit" value="EDIT">
+</form> 
+
+<h1>Delete Article</h1>
+<form action="/articles/{{articles.title}}/edit?_method=DELETE" method="POST">
+  ID: <input type="text" name="name" value="{{articles.item.title}}" disabled><p>
+  <input type="submit" value="DELETE">
+</form>

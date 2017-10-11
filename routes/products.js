@@ -50,7 +50,7 @@ router.route('/:id')
     });
     // I bet this will break...I think I'm wrong
     } else {
-      return res.redirect(`/products/${id}/edit`);
+      return res.redirect(`/products`);
     }
   });
 
