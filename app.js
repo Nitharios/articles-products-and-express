@@ -4,15 +4,23 @@ console.log(sanity);
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const hbs = require('express-handlebars');
 const products = require('./routes/products');
 const articles = require('./routes/articles');
 
 const port = process.env.PORT || 8888;
 
 const app = express();
+app.engine('.hbs', hbs({
+  // 'main.hbs' exists in views/layouts/
+  defaultLayout : 'main',
+  extname : '.hbs'
+}));
+app.set('view engine', '.hbs');
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  // 'home.hbs' exists in views/
+  res.render('home');
 });
 
 app.use(bodyParser.urlencoded({ "extended" : true }));

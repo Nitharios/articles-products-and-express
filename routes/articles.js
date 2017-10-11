@@ -11,7 +11,7 @@ const invalidReq = { "success" : false };
 
 router.route('/')
   .get((req, res) => {
-    res.render(''/*../views/index.hbs*/);
+    res.render('index', { articles : req.baseUrl });
   })
 
   .post((req, res) => {
