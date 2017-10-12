@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 
+const requestTracker = require('../logs/analytics-tracker');
+
 const Products = require('../db/products');
 const products = new Products();
 
@@ -11,6 +13,7 @@ const invalidReq = { "success" : false };
 // NEED TO USE PATH AND JOIN AND __dir FOR CROSS-PLATFORM
 router.route('/')
   .get((req, res) => {
+    console.log('tracking', requestTracker(req.baseUrl, req.method, req.originalUrl));
     res.render('index', { 
       products : {
         list : products.listAll()
