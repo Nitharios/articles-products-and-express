@@ -25,7 +25,7 @@ class Articles {
 
   create(data) {
 
-    if (this.find(data.title)) return false;
+    if (this.locate(data.title)) return false;
 
     let articleInfo = {
       title : data.title,
@@ -39,12 +39,15 @@ class Articles {
     return true;
   }
 
-  find(title) {
+  locate(title) {
+    console.log('one', title)
+    for (let i = 0; i < this._articleList.length; i++) {
+      console.log('two', this._articleList[i].title)
+      if (this._articleList[i].title === title) return i;
+    }
     // returns a reference to location of title
-    return this._articleList.find(element => {
-      return element.title === title;
-    })
-
+    // return this._articleList.findIndex(element => {
+    //   return element.title === title;
     return false;
     // if (this._articleList.hasOwnProperty(title)) return this._articleList[title];
     // else return false;
@@ -65,23 +68,12 @@ class Articles {
 
       return true;
     }
-
-
-    // if (data.title) {
-    //   item.title = data.title;
-    //   item.urlTitle = encodeURI(data.title);
-    // }
-      
-    // if (data.body) item.body = data.body;
-    // if (data.author) item.author = data.author;
-  
-    // console.log(this._articleList);
-    // return true;
   }
 
   remove(title) {
-    if (this._articleList.hasOwnProperty(title)) {
-      this._articleList[title] = {};
+
+    if (this.locate(title)) {
+      this.locate(title) = {};
       return true;
 
     } else {

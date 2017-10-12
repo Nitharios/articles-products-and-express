@@ -34,8 +34,8 @@ router.route('/new')
 router.route('/:title')
   .get((req, res) => {
     let title = req.params.title;
-    let targetItem = articles.find(title);
-    if (targetItem) { 
+    let targetItem = articles.locate(title);
+    if (targetItem > -1) { 
 
       return res.render('index', { 
         articles : {
@@ -51,8 +51,10 @@ router.route('/:title')
   .put((req, res) => {
     // title references the title passed in by the url
     let title = req.params.title;
+    console.log('one', title);
     // target item references the location of the item to edit
-    let targetItem = articles.find(title);
+    let targetItem = articles.locate(title);
+    console.log('two', targetItem);
 
     if (articles.edit(req.body, targetItem)) return res.redirect(`/articles/${title}`);
     else return res.redirect(`/articles/${title}/edit`);
@@ -68,7 +70,7 @@ router.route('/:title')
 router.route('/:title/edit')
   .get((req, res) => {
     let title = req.params.title;
-    let targetItem = articles.find(title);
+    let targetItem = articles.locate(title);
 
     if (targetItem) { 
       return res.render('index', { 
