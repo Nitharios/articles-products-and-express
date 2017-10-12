@@ -35,7 +35,8 @@ router.route('/:title')
   .get((req, res) => {
     let title = req.params.title;
     let targetItem = articles.locate(title);
-    if (targetItem > -1) { 
+    console.log(targetItem);
+    if (targetItem) { 
 
       return res.render('index', { 
         articles : {

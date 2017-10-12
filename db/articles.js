@@ -38,48 +38,41 @@ class Articles {
     console.log('articleList', this._articleList);
     return true;
   }
-
+  // returns the index that the array is located at
   locate(title) {
-    console.log('one', title)
     for (let i = 0; i < this._articleList.length; i++) {
-      console.log('two', this._articleList[i].title)
-      if (this._articleList[i].title === title) return i;
+      if (this._articleList[i].title === title) return this._articleList[i];
     }
-    // returns a reference to location of title
-    // return this._articleList.findIndex(element => {
-    //   return element.title === title;
+
     return false;
-    // if (this._articleList.hasOwnProperty(title)) return this._articleList[title];
-    // else return false;
   }
 
-  edit(data, item) {
+  edit(data) {
+    let index = locate(data.title);
 
-    if (!item) {
-      return false;
-
-    } else {
-      if (data.title) {
-        item.title = data.title;
-        item.urlTitle = encodeURI(data.title);
+    if (index > -1) {
+      if (index.title) {
+        this._articleList[i].title = data.title;
+        this._articleList[i].urlTitle = encodeURI(data.title)
       }
-      if (data.body) item.body = data.body;
-      if (data.author) item.author = data.author;
+      if (index.body) this._articleList[i].body = data.body;
+      if (index.author) this._articleList[i].author = data.author;
 
       return true;
     }
+
+    return false;
   }
 
-  remove(title) {
+  remove(data) {
+    let index = locate(data.title);
 
-    if (this.locate(title)) {
-      this.locate(title) = {};
+    if (index > -1) {
+      this._articleList.splice(index, 1);
       return true;
-
-    } else {
-     
-      return false;
     }
+
+    return false;
   }
 }
 
