@@ -34,30 +34,29 @@ router.route('/new')
 router.route('/:title')
   .get((req, res) => {
     let title = req.params.title;
-    let targetItem = articles.locate(title);
-    console.log(targetItem);
-    if (targetItem) { 
+
+    if (articles.verify(title)) { 
+      let data = articles.retrieve(title);
 
       return res.render('index', { 
         articles : {
-          item : targetItem 
+          article : true,
+          title : data.title,
+          body : data.body,
+          author : data.author
         }
     });
     // I bet this will break...I think I'm wrong
     } else {
+      console.log('there');
       return res.redirect(`/articles`);
     }
   })
 
   .put((req, res) => {
-    // title references the title passed in by the url
     let title = req.params.title;
-    console.log('one', title);
-    // target item references the location of the item to edit
-    let targetItem = articles.locate(title);
-    console.log('two', targetItem);
 
-    if (articles.edit(req.body, targetItem)) return res.redirect(`/articles/${title}`);
+    if (articles.edit(req.body)) return res.redirect(`/articles/${title}`);
     else return res.redirect(`/articles/${title}/edit`);
   })
 
@@ -70,20 +69,23 @@ router.route('/:title')
 
 router.route('/:title/edit')
   .get((req, res) => {
-    let title = req.params.title;
-    let targetItem = articles.locate(title);
+    let targetItem = articles.verify(req.params.title);
+    console.log(targetItem);
 
     if (targetItem) { 
+      let data = articles.retrieve(req.params.title);
+      console.log(data);
       return res.render('index', { 
-        articles : {
+        articles : { 
           edit: true,
-          title : title,
-          item : targetItem 
+          title : data.title,
+          body : data.body,
+          author : data.author 
         }
-    });
+      });
     // I bet this will break...I think I'm wrong
     } else {
-
+      console.log('here');
       return res.redirect(`/articles/${title}`);
     }
   });

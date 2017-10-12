@@ -24,8 +24,7 @@ class Articles {
   }
 
   create(data) {
-
-    if (this.locate(data.title)) return false;
+    if (this.verify(data.title)) return false;
 
     let articleInfo = {
       title : data.title,
@@ -38,34 +37,62 @@ class Articles {
     console.log('articleList', this._articleList);
     return true;
   }
-  // returns the index that the array is located at
+  // returns the index that the array is verifyd at
+  verify(title) {
+    return this._articleList.some(element => {
+      return element.title === title;
+    })
+
+    return false;
+  }
+
   locate(title) {
-    for (let i = 0; i < this._articleList.length; i++) {
-      if (this._articleList[i].title === title) return this._articleList[i];
-    }
+    return this._articleList.findIndex((element, index) => {
+      return element.title === title;
+    })
+  }
+
+  retrieve(title) {
+    return this._articleList.find(element => {
+      return element.title === title;
+    })
 
     return false;
   }
 
   edit(data) {
-    let index = locate(data.title);
+    if (this.verify(data.title)) {
+      let index = this.locate(data.title);
+      let targetItem = this._articleList[index];
 
-    if (index > -1) {
-      if (index.title) {
-        this._articleList[i].title = data.title;
-        this._articleList[i].urlTitle = encodeURI(data.title)
+      if (data.title) {
+        targetItem.title = data.title;
+        targetItem.urlTitle = encodeURI(data.title);
       }
-      if (index.body) this._articleList[i].body = data.body;
-      if (index.author) this._articleList[i].author = data.author;
-
+      if (data.body) targetItem.body = data.body;
+      if (data.author) targetItem.author = data.author;
+      
       return true;
     }
 
     return false;
   }
+    // let index = verify(data.title);
+
+    // if (index > -1) {
+    //   if (index.title) {
+    //     this._articleList[i].title = data.title;
+    //     this._articleList[i].urlTitle = encodeURI(data.title)
+    //   }
+    //   if (index.body) this._articleList[i].body = data.body;
+    //   if (index.author) this._articleList[i].author = data.author;
+
+    //   return true;
+    // }
+
 
   remove(data) {
-    let index = locate(data.title);
+    let index = this.verify(data.title);
 
     if (index > -1) {
       this._articleList.splice(index, 1);
