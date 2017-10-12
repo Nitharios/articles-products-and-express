@@ -2,21 +2,21 @@
 
 class Articles {
   constructor() {
-    this._articleList = {
-      'Summertime Is For Everyone' : {
+    this._articleList = [
+      {
         title : 'Summertime Is For Everyone',
         body : 'Summertime is for everyone!',
         author : 'Somebody',
         urlTitle : 'Summertime%20Is%20For%20Everyone'
       },
 
-      'Climate Change Is Real' : {
+      {
         title : 'Climate Change Is Real',
         body : 'IT IS REAL!',
         author : 'Scientist',
         urlTitle : 'Climate%20Change%20Is%20Real'
       }
-    };
+    ];
   }
 
   listAll() {
@@ -24,6 +24,9 @@ class Articles {
   }
 
   create(data) {
+
+    if (this.find(data.title)) return false;
+
     let articleInfo = {
       title : data.title,
       body : data.body,
@@ -31,15 +34,20 @@ class Articles {
       urlTitle : encodeURI(data.title)
     };
 
-    this._articleList[articleInfo.title] = articleInfo;
+    this._articleList.push(articleInfo);
     console.log('articleList', this._articleList);
     return true;
   }
 
   find(title) {
     // returns a reference to location of title
-    if (this._articleList.hasOwnProperty(title)) return this._articleList[title];
-    else return false;
+    this._articleList.forEach(element => {
+     if (element.title === title) return element;
+    })
+
+    return false;
+    // if (this._articleList.hasOwnProperty(title)) return this._articleList[title];
+    // else return false;
   }
 
   edit(data, item) {
