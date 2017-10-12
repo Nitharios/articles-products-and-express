@@ -41,8 +41,8 @@ class Articles {
 
   find(title) {
     // returns a reference to location of title
-    this._articleList.forEach(element => {
-     if (element.title === title) return element;
+    return this._articleList.find(element => {
+      return element.title === title;
     })
 
     return false;
@@ -51,16 +51,32 @@ class Articles {
   }
 
   edit(data, item) {
-    if (data.title) {
-      item.title = data.title;
-      item.urlTitle = encodeURI(data.title);
+
+    if (!item) {
+      return false;
+
+    } else {
+      if (data.title) {
+        item.title = data.title;
+        item.urlTitle = encodeURI(data.title);
+      }
+      if (data.body) item.body = data.body;
+      if (data.author) item.author = data.author;
+
+      return true;
     }
+
+
+    // if (data.title) {
+    //   item.title = data.title;
+    //   item.urlTitle = encodeURI(data.title);
+    // }
       
-    if (data.body) item.body = data.body;
-    if (data.author) item.author = data.author;
+    // if (data.body) item.body = data.body;
+    // if (data.author) item.author = data.author;
   
-    console.log(this._articleList);
-    return true;
+    // console.log(this._articleList);
+    // return true;
   }
 
   remove(title) {
