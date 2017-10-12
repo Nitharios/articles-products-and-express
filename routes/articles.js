@@ -27,8 +27,8 @@ router.route('/new')
   })
 
   .post((req, res) => {
-    if (articles.create(req.body)) return res.redirect('/articles')/*res.redirect('/articles')*/;
-    else return res.redirect('/articles/new')/*res.redirect('/articles/new')*/;
+    if (articles.create(req.body)) return res.redirect('/articles');
+    else return res.redirect('/articles/new');
   });
 
 router.route('/:title')

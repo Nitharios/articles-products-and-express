@@ -28,26 +28,26 @@ router.route('/new')
   })
 
   .post((req, res) => {
-    let createItem = products.create(req.body);
-    console.log(req.body);
-
-    // will eventually handle routes
-    if (createItem) return res.redirect('/products');
-    else return res.redirect('/products/new');
+    if (products.create(req.body)) return res.redirect('/products');
+    else return res.redirect('/articles/new');
   });
 
 router.route('/:id')
   .get((req, res) => {
     let id = req.params.id;
-    let targetItem = products.find(id);
-    console.log(targetItem);
 
-    if (targetItem) { 
-      return res.render('index', { 
+    if (products.verify(id)) { 
+      let data = products.retrieve(id);
+
+      return res.render('index', {
         products : {
-          item : targetItem 
+          product: true,
+          name : data.name,
+          price : data.price,
+          inventory : data.inveotry
         }
-    });
+      })
+    };
     // I bet this will break...I think I'm wrong
     } else {
       return res.redirect(`/products`);
@@ -56,9 +56,8 @@ router.route('/:id')
 
   .put((req, res) => {
     let id = req.params.id;
-    let targetItem = products.find(id);
 
-    if (products.edit(req.body, targetItem)) return res.redirect(`/products/${id}`);
+    if (products.edit(req.body) return res.redirect(`/products/${id}`);
     else return res.redirect(`/products/${id}/edit`);
     // console.log(products.listAll());
   })
@@ -72,15 +71,18 @@ router.route('/:id')
 
 router.route('/:id/edit')
   .get((req, res) => {
-    let id = req.params.id;
-    let targetItem = products.find(id);
+    let targetItem = products.verify(req.params.title);
 
     if (targetItem) { 
+      let data = products.retrieve(req.params.title);
+
       return res.render('index', {
         products : {
+          product: true,
           edit : true,
-          id : id,
-          item : targetItem
+          id : data.id,
+          body : data.body,
+          author : data.author
         }
       });
     
