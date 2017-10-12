@@ -1,0 +1,43 @@
+{{> nav}}
+{{!-- if the object passed in has they key 'products' --}}
+{{#if products}}
+  {{!-- if 'products' has a key called 'list' --}}
+  {{#if products.list}}
+    {{!-- looks in 'partials' directory for 'products' directory and the file 'listProducts' --}}
+    {{> products/listProducts}}
+  {{!-- if 'products' has a key called 'new' --}}
+  {{else if products.new}}
+
+    {{> products/new}}
+
+  {{else if products.item}}
+
+    {{> products/product}}
+
+    {{#if products.edit}}
+      {{> products/edit}}
+    {{/if}}
+
+  {{/if}}
+
+{{else if articles}}
+  
+  {{#if articles.list}}
+
+    {{> articles/listArticles}}
+
+  {{else if articles.new}}
+
+    {{> articles/new}}
+
+  {{else if articles.item}}
+
+    {{> articles/article}}
+
+    {{#if articles.edit}}
+      {{> articles/edit}}
+    {{/if}}
+
+  {{/if}}
+
+{{/if}}

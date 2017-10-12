@@ -1,0 +1,22 @@
+<h1>Articles</h1>
+
+<h2>Add New Article</h2>
+
+<form action="/articles/new" method="get">
+  <input type="submit" value="ADD">
+</form>
+
+<h2>List of Articles</h2>
+
+<ul>
+  {{#each articles.list}}
+    <li>
+      <h4>Title: {{title}}, 
+      <br>Body: {{body}}, 
+      <br>Author: {{author}}
+      <p><form action="" method="get">
+        <input type="submit" formaction="/articles/{{title}}/edit" value="EDIT">
+      </form>
+    </li>
+  {{/each}}    
+</ul>
