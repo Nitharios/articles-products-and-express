@@ -1,13 +1,12 @@
 <h1>Product</h1>
 
 <h4>
-  ID: {{products.item.id}}<br> 
-  Name: {{products.item.name}}<br>
-  Price: {{products.item.price}}<br>
-  Inventory: {{products.item.inventory}}
+  Name: {{products.name}}<br>
+  Price: {{products.price}}<br>
+  Inventory: {{products.inventory}}
 </h4>
 
 <p>
-<form action="/products/{{products.item.id}}/edit" method="get">
+<form action="/products/{{products.id}}/edit" method="get">
   <input type="submit" value="EDIT">
 </form>

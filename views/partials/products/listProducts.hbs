@@ -11,12 +11,11 @@
 <ul>
   {{#each products.list}}
     <li>
-      <h4>ID: {{id}}, 
       <br>Name: {{name}}, 
       <br>Price: {{price}}, 
       <br>Inventory: {{inventory}}</h4>
       <p><form action="" method="get">
-        <input type="submit" formaction="/products/{{id}}/edit" value="EDIT">
+        <input type="submit" formaction="/products/{{id}}" value="VIEW">
       </form>
     </li>
   {{/each}}
