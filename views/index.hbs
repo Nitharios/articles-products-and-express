@@ -1,6 +1,13 @@
 {{> nav}}
 {{!-- if the object passed in has they key 'products' --}}
 {{#if products}}
+  <h1>Products</h1>
+
+  <h2>Add New Product</h2>
+
+  <form action="/products/new" method="get">
+    <input type="submit" value="ADD">
+  </form>
   {{!-- if 'products' has a key called 'list' --}}
   {{#if products.list}}
     {{!-- looks in 'partials' directory for 'products' directory and the file 'listProducts' --}}
@@ -21,6 +28,13 @@
   {{/if}}
 
 {{else if articles}}
+  <h1>Articles</h1>
+
+  <h2>Add New Article</h2>
+
+  <form action="/articles/new" method="get">
+    <input type="submit" value="ADD">
+  </form>
   
   {{#if articles.list}}
 
