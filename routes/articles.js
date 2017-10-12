@@ -48,7 +48,7 @@ router.route('/:title')
     });
     // I bet this will break...I think I'm wrong
     } else {
-      console.log('there');
+
       return res.redirect(`/articles`);
     }
   })
@@ -62,6 +62,7 @@ router.route('/:title')
 
   .delete((req, res) => {
     let title = req.params.title;
+    console.log(title);
 
     if (articles.remove(title)) return res.redirect('/articles');
     else return res.redirect(`/articles/${title}`); 
@@ -70,11 +71,10 @@ router.route('/:title')
 router.route('/:title/edit')
   .get((req, res) => {
     let targetItem = articles.verify(req.params.title);
-    console.log(targetItem);
 
     if (targetItem) { 
       let data = articles.retrieve(req.params.title);
-      console.log(data);
+
       return res.render('index', { 
         articles : {
           article : true, 
@@ -86,7 +86,7 @@ router.route('/:title/edit')
       });
     // I bet this will break...I think I'm wrong
     } else {
-      console.log('here');
+
       return res.redirect(`/articles/${title}`);
     }
   });

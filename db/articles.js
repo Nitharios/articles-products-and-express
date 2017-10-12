@@ -77,26 +77,14 @@ class Articles {
 
     return false;
   }
-    // let index = verify(data.title);
 
-    // if (index > -1) {
-    //   if (index.title) {
-    //     this._articleList[i].title = data.title;
-    //     this._articleList[i].urlTitle = encodeURI(data.title)
-    //   }
-    //   if (index.body) this._articleList[i].body = data.body;
-    //   if (index.author) this._articleList[i].author = data.author;
-
-    //   return true;
-    // }
-
-
-  remove(data) {
-    let index = this.verify(data.title);
-
-    if (index > -1) {
-      this._articleList.splice(index, 1);
-      return true;
+  remove(title) {
+    console.log(title);
+    if (this.verify(title)) {
+      return this._articleList.filter((element) => {
+        console.log('here', element);
+        return element.title !== title;
+      })
     }
 
     return false;
