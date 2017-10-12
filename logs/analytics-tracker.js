@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function logRequest(directory, method, uri) {
+  console.log('here');
   // time 2017-10-11T23:51:56:005Z
   let timeStamp = new Date();
   // 2017-10-11
@@ -11,7 +12,8 @@ function logRequest(directory, method, uri) {
 
   let location = path.join(__dirname, directory, '/');
   // [method] [uri] [time stamp]
-  let data = `[${method}] [${uri}] [${time}]`
+  let data = `[${method}] [${uri}] [${time}]
+`;
   // appends the data to the specific location 
   fs.appendFile(`${location}${date}.log`, data, (err) =>{
     if (err) console.log(err);

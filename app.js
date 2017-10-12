@@ -6,6 +6,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const hbs = require('express-handlebars');
+const requestTracker = require('./logs/analytics-tracker');
+// requestTracker(req.baseUrl, req.method, req.originalUrl);
 const products = require('./routes/products');
 const articles = require('./routes/articles');
 
@@ -20,16 +22,14 @@ app.engine('.hbs', hbs({
 }));
 
 app.set('view engine', '.hbs');
-
+app.use(bodyParser.urlencoded({ "extended" : true }));
+// applies methodOverride to the method assigned to _method in the URL of a form submission page
+app.use(methodOverride('_method'));
 app.get('/', (req, res) => {
   // 'home.hbs' exists in views/
   // will use the default layout 'main' to build HTML and then render the contents of 'home' in the {{body}} section of 'main'
   res.render('home');
 });
-
-app.use(bodyParser.urlencoded({ "extended" : true }));
-// applies methodOverride to the method assigned to _method in the URL of a form submission page
-app.use(methodOverride('_method'));
 
 app.use('/products', products);
 app.use('/articles', articles);
