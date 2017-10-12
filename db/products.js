@@ -64,12 +64,11 @@ class Products {
   }
 
   // will edit a product based on id
-  edit(data) {
-    if (this.verify(data.id)) {
-      let index = this.locate(data.id);
+  edit(id, data) {
+    if (this.verify(id)) {
+      let index = this.locate(id);
       let targetItem = this._productList[index];
 
-      if (data.id) targetItem.id = data.id;
       if (data.name) targetItem.name = data.name;
       if (data.price) targetItem.price = data.price;
       if (data.inventory) targetItem.inventory = data.inventory;

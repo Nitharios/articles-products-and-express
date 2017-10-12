@@ -57,8 +57,9 @@ router.route('/:id')
 
   .put((req, res) => {
     let id = req.params.id;
+    console.log(req.body);
 
-    if (products.edit(req.body)) return res.redirect(`/products/${id}`);
+    if (products.edit(id, req.body)) return res.redirect(`/products/${id}`);
     else return res.redirect(`/products/${id}/edit`);
     // console.log(products.listAll());
   })
@@ -79,6 +80,7 @@ router.route('/:id/edit')
 
     if (targetItem) { 
       let data = products.retrieve(id);
+      console.log('lksdjf', data);
 
       return res.render('index', {
         products : {
