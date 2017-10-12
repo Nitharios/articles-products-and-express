@@ -66,7 +66,9 @@ router.route('/:id')
   .delete((req, res) => {
     let id = req.params.id;
 
-    if (products.remove(id)) return res.redirect('/products');
+    if (products.remove(id)) {
+    return res.redirect('/products');
+    }
     else return res.redirect(`/products/${id}`);
   });
 

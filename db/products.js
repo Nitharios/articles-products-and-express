@@ -83,9 +83,9 @@ class Products {
   // will delete a product based on id
   remove(id) {
     if (this.verify(id)) {
-      return this._productList.filter((element) => {
-        return element.id !== Number(id);
-      })
+      let index = this.locate(id);
+
+      return this._productList.splice(index, 1);
     }
 
     return false;

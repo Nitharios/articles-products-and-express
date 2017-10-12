@@ -79,12 +79,10 @@ class Articles {
   }
 
   remove(title) {
-    console.log(title);
     if (this.verify(title)) {
-      return this._articleList.filter((element) => {
-        console.log('here', element);
-        return element.title !== title;
-      })
+      let index = this.locate(title);
+
+      return this._articleList.splice(index, 1);
     }
 
     return false;
