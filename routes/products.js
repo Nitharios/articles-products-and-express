@@ -35,19 +35,20 @@ router.route('/new')
 router.route('/:id')
   .get((req, res) => {
     let id = req.params.id;
-
+    console.log(id);
     if (products.verify(id)) { 
+      console.log('here');
       let data = products.retrieve(id);
 
       return res.render('index', {
         products : {
           product: true,
+          id : data.id,
           name : data.name,
           price : data.price,
-          inventory : data.inveotry
+          inventory : data.inventory
         }
       })
-    };
     // I bet this will break...I think I'm wrong
     } else {
       return res.redirect(`/products`);
@@ -57,7 +58,7 @@ router.route('/:id')
   .put((req, res) => {
     let id = req.params.id;
 
-    if (products.edit(req.body) return res.redirect(`/products/${id}`);
+    if (products.edit(req.body)) return res.redirect(`/products/${id}`);
     else return res.redirect(`/products/${id}/edit`);
     // console.log(products.listAll());
   })
@@ -71,18 +72,20 @@ router.route('/:id')
 
 router.route('/:id/edit')
   .get((req, res) => {
-    let targetItem = products.verify(req.params.title);
+    let id = req.params.id;
+    let targetItem = products.verify(id);
 
     if (targetItem) { 
-      let data = products.retrieve(req.params.title);
+      let data = products.retrieve(id);
 
       return res.render('index', {
         products : {
           product: true,
           edit : true,
           id : data.id,
-          body : data.body,
-          author : data.author
+          name : data.name,
+          price : data.price,
+          inventory : data.inventory
         }
       });
     

@@ -1,17 +1,16 @@
 /* jshint esversion:6 */
-
 class Products {
   constructor() {
     this._productList = [
       {
-        'id' : '1',
+        'id' : 1,
         'name' : 'potato chips',
         'price' : 2,
         'inventory' : 20
       },
 
       {
-        'id' : '2',
+        'id' : 2,
         'name' : 'watermelon',
         'price' : 10,
         'inventory' : 5
@@ -31,21 +30,20 @@ class Products {
     this._productNumber += 1;
 
     let productInfo = {
-      id : data.id,
+      id : this._productNumber,
       name : data.name,
       price : Number(data.price),
       inventory : Number(data.inventory)
     };
 
     this._productList.push(productInfo);
-    console.log('productList', this._productList);
     return true;
   }
 
   // will return reference to location of id through coersion
   verify(id) {
     return this._productList.some(element => {
-      return element.id === id;
+      return element.id === Number(id);
     })
 
     return false;
@@ -53,13 +51,13 @@ class Products {
 
   locate(id) {
     return this._productList.findIndex((element, index) => {
-      return element.id === id;
+      return element.id === Number(id);
     })
   }
 
   retrieve(id) {
     return this._productList.find(element => {
-      return element.id === id;
+      return element.id === Number(id);
     })
 
     return false;
@@ -84,11 +82,9 @@ class Products {
 
   // will delete a product based on id
   remove(id) {
-    console.log(id);
     if (this.verify(id)) {
       return this._productList.filter((element) => {
-        console.log('here', element);
-        return element.id !== id;
+        return element.id !== Number(id);
       })
     }
 
@@ -97,14 +93,3 @@ class Products {
 } 
 
 module.exports = Products;
-
-  // will verify that the req name is a valid format
-  // verify(data) {
-  //   try {
-  //     return this.create(data);
-    
-  //   } catch (e) {
-  //     console.log(e);
-  //     return false;
-  //   }
-  // }

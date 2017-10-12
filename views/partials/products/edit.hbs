@@ -1,7 +1,7 @@
 <h1>Edit Product</h1>
 
 {{!-- products.item --}}
-<form action="/products/{{products.id}}/edit?_method=put" method="post">
+<form action="/products/{{products.id}}?_method=put" method="post">
   Name: <input type="text" name="name" value="{{products.name}}"><p>
   Price: <input type="text" name="price" value="{{products.price}}"><p>
   Inventory: <input type="text" name="inventory" value="{{products.inventory}}"><p>
@@ -10,7 +10,7 @@
 </form> 
 
 <h1>Delete Product</h1>
-<form action="/products/{{products.id}}/edit?_method=delete" method="post">
+<form action="/products/{{products.id}}?_method=delete" method="post">
   ID: <input type="text" name="name" value="{{products.id}}" disabled><p>
   <input type="submit" value="DELETE">
 </form>

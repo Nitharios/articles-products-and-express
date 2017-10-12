@@ -70,10 +70,11 @@ router.route('/:title')
 
 router.route('/:title/edit')
   .get((req, res) => {
-    let targetItem = articles.verify(req.params.title);
+    let title = req.params.title
+    let targetItem = articles.verify(title);
 
     if (targetItem) { 
-      let data = articles.retrieve(req.params.title);
+      let data = articles.retrieve(title);
 
       return res.render('index', { 
         articles : {
