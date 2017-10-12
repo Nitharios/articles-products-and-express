@@ -76,7 +76,8 @@ router.route('/:title/edit')
       let data = articles.retrieve(req.params.title);
       console.log(data);
       return res.render('index', { 
-        articles : { 
+        articles : {
+          article : true, 
           edit: true,
           title : data.title,
           body : data.body,
