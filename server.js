@@ -3,6 +3,8 @@ const sanity = "You're not crazy!";
 console.log(sanity);
 
 const express = require('express');
+const products = require('./routes/products');
+const articles = require('./routes/articles');
 const port = process.env.PORT || 8888;
 
 const app = express();
