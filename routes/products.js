@@ -2,12 +2,13 @@
 const express = require('express');
 const router = express.Router();
 
-const Products = require('../handlers/index');
+const Products = require('../models/products');
 const products = new Products();
 
 router.route('/')
   .get((req, res) => {
-    res.json('Hello from Products'
+    let productsList = products.listAll();
+    res.json(productsList
       // 'index', {
       // test : 'testest'
     // }

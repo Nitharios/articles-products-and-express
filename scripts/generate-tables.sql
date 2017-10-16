@@ -1,13 +1,15 @@
 -- Don't forget semicolons!
 \c nniosco
 
+
+DROP DATABASE IF EXISTS articles_and_products;
 DROP USER IF EXISTS db_manager;
-DROP DATABASE IF EXISTS articles_products;
 
 CREATE USER db_manager;
-CREATE DATABASE articles_and_products OWNER db_manager;
+CREATE DATABASE articles_and_products WITH OWNER db_manager;
 
 \c articles_and_products;
+SET ROLE db_manager;
 
 CREATE TABLE products(
   id          SERIAL        PRIMARY KEY,

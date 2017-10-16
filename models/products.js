@@ -1,6 +1,6 @@
 /* jshint esversion:6 */
 const pgp = require('pg-promise')();
-const port = process.env.PORT || 8888;
+const port = 5432;
 const database = 'articles_and_products';
 const user = 'db_manager';
 const connect = {
@@ -16,7 +16,14 @@ class Products {
 
   listAll() {
     let query = 'SELECT id, name, price, inventory FROM products;';
-    return db.any(query);
+    return db.any(query)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+      
+      console.log(err);
+    });
   }
 
   create(product) {
