@@ -7,12 +7,11 @@ const products = new Products();
 
 router.route('/')
   .get((req, res) => {
-    let productsList = products.listAll();
-    res.json(productsList
-      // 'index', {
-      // test : 'testest'
-    // }
-    );
+    // listAll will return a Promise
+    return products.listAll()
+    .then((data) => {
+      res.json(data);
+    });
   });
 
 module.exports = router;

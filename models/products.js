@@ -16,12 +16,12 @@ class Products {
 
   listAll() {
     let query = 'SELECT id, name, price, inventory FROM products;';
+    
     return db.any(query)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-      
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
       console.log(err);
     });
   }

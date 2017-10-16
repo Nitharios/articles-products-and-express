@@ -1,7 +1,6 @@
 -- Don't forget semicolons!
 \c nniosco
 
-
 DROP DATABASE IF EXISTS articles_and_products;
 DROP USER IF EXISTS db_manager;
 
