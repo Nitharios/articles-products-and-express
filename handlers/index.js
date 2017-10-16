@@ -14,6 +14,11 @@ const db = pgp(connect);
 
 class Products {
 
+  listAll() {
+    let query = 'SELECT id, name, price, inventory FROM products;';
+    return db.any(query);
+  }
+
   create(product) {
     let name = product.name;
     let price = product.price;

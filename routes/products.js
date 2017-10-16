@@ -7,7 +7,7 @@ const products = new Products();
 
 router.route('/')
   .get((req, res) => {
-    res.render('Hello from Products'
+    res.json('Hello from Products'
       // 'index', {
       // test : 'testest'
     // }

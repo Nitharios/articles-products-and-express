@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
   res.json('Hello World!');
 });
 
+app.use('/products', products);
+
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);
 });
