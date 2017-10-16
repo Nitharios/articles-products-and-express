@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Products = require('../handlers/products');
+const Products = require('../handlers/index');
 const products = new Products();
 
 router.route('/')
