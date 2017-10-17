@@ -1,0 +1,13 @@
+<h1>Product Information</h1>
+
+{{#each data}}
+  
+  <br>ID: {{{id}}}
+  <br>Name: {{name}}
+  <br>Price: {{price}}
+  <br>Inventory: {{inventory}}
+
+  <p><form action="/products/{{id}}/edit" method="get"><input type="submit" value="EDIT">
+  </form>
+
+{{/each}}

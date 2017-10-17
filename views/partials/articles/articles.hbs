@@ -1,0 +1,23 @@
+<h1>Products</h1>
+
+<h2>Add New Product</h2>
+
+<form action="/products/new" method="get">
+  <input type="submit" value="ADD">
+</form>
+
+<h2>List of Products</h2>
+
+<ul>
+  {{#each data}}
+    <li>
+      <h4>ID: {{id}}, 
+      <br>Name: {{name}}, 
+      <br>Price: {{price}}, 
+      <br>Inventory: {{inventory}}</h4>
+      <p><form action="/products/{{id}}/edit" method="get">
+        <input type="submit" value="EDIT">
+      </form>
+    </li>
+  {{/each}}
+</ul>
