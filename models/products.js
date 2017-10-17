@@ -48,7 +48,7 @@ class Products {
   }
 
   find(productID) {
-    let query = `SELECT name, price, inventory
+    let query = `SELECT id, name, price, inventory
                  FROM products
                  WHERE id = ${productID}`;
 

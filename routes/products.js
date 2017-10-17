@@ -25,7 +25,7 @@ router.route('/new')
     return products.create(req.body)
       .then((data) => {
         console.log('CREATED', data);
-        res.json(data);
+        res.redirect('/products');
       });
   });
 
@@ -36,6 +36,7 @@ router.route('/:id')
 
     return products.find(id)
       .then((data) => {
+        console.log('here', data);
         res.render('partials/product', { data });
       });
   })
@@ -45,7 +46,7 @@ router.route('/:id')
     return products.edit(id, req.body)
       .then((data) => {
         console.log('EDITED item', id, data);
-        res.json(data);
+        res.redirect('/products/${id}');
       });
   })
   .delete((req, res) => {
@@ -54,7 +55,7 @@ router.route('/:id')
     return products.remove(id)
       .then((data) => {
         console.log('DELETED item', id, { data });
-        res.json(data);
+        res.redirect('/products');
       });
   });
 
@@ -65,7 +66,7 @@ router.route('/:id/edit')
 
     return products.find(id)
       .then((data) => {
-        res.render('partials/edit', data);
+        res.render('partials/edit', { data });
       });
   });
 

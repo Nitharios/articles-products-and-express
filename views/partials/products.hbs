@@ -15,8 +15,8 @@
       <br>Name: {{name}}, 
       <br>Price: {{price}}, 
       <br>Inventory: {{inventory}}</h4>
-      <p><form action="" method="get">
-        <input type="submit" formaction="/products/{{id}}/edit" value="EDIT">
+      <p><form action="/products/{{id}}/edit" method="get">
+        <input type="submit" value="EDIT">
       </form>
     </li>
   {{/each}}
