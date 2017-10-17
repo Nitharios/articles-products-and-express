@@ -35,9 +35,11 @@ class Articles {
     let title = article.title;
     let author = article.author;
     let body = article.body;
-    let query = `INSERT INTO articles (title, author, body)
-                 VALUES($1, $2, $3)`;
-    let params = [title, author, body];
+    let uri = encodeURI(article.title);
+
+    let query = `INSERT INTO articles (title, author, body, uri)
+                 VALUES($1, $2, $3, $4)`;
+    let params = [title, author, body, uri];
 
     return db.any(query, params)
       .then((data) => {
@@ -48,10 +50,10 @@ class Articles {
       }); 
   }
 
-  find(articleID) {
+  find(articleTitle) {
     let query = `SELECT id, title, author, body
                  FROM articles
-                 WHERE id = ${articleID}`;
+                 WHERE title = ${articleTitle}`;
 
     return db.any(query)
       .catch((err) => {
@@ -59,39 +61,42 @@ class Articles {
       });
   }
 
-  edit(articleID, article) {
-    let query = `SELECT title, author, body 
+  edit(articleTitle, article) {
+    let query = `SELECT title, author, body, uri 
                  FROM articles
-                 WHERE id = ${articleID}`;
+                 WHERE title = ${articleTitle}`;
 
     return db.any(query)
       .then((data) => {
         if (article.title) {
-          db.any(`UPDATE articles SET title = '${article.title}' WHERE id = ${articleID}`);
+          let uri = encodeURI(article.title);
+
+          db.any(`UPDATE articles SET title = '${article.title}' WHERE title = ${articleTitle}`);
+          db.any(`UPDATE articles SET uri = '${uri}' WHERE title = ${articleTitle}`);
         }
 
         if (article.author) {
-          db.any(`UPDATE articles SET author = '${article.author}' WHERE id = ${articleID}`);
+          db.any(`UPDATE articles SET author = '${article.author}' WHERE title = ${articleTitle}`);
         }
 
         if (article.body) {
-          db.any(`UPDATE articles SET body = '${article.body}' WHERE id = ${articleID}`);
+          db.any(`UPDATE articles SET body = '${article.body}' WHERE title = ${articleTitle}`);
         }
 
-        return this.find(articleID);
+        return this.find(articleTitle);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  remove(articleID) {
+  remove(articleTitle) {
     let query = `DELETE FROM articles
-                 WHERE id = ${articleID}`;
+                 WHERE title = ${articleTitle}`;
 
     return db.any(query)
       .then((data) => {
-        return this.find(articleID);
+        return this.find(articleTitle);
       })
       .catch((err) => {
         console.log(err);

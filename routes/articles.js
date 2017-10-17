@@ -32,41 +32,43 @@ router.route('/new')
   });
 
 // handles updating a article in the table
-router.route('/:id')
+router.route('/:title')
   .get((req, res) => {
-    let id = req.params.id;
+    let title = qs.stringify(req.params.title);
 
-    return articles.find(id)
+    return articles.find(title)
       .then((data) => {
         // console.log('here', data);
         res.render('partials/articles/article', { data });
       });
   })
   .put((req, res) => {
-    let id = req.params.id;
+    let title = qs.stringify(req.params.title);
 
-    return articles.edit(id, req.body)
+    return articles.edit(title, req.body)
       .then((data) => {
-        console.log('EDITED item', id, data);
-        res.redirect(`/articles/${id}`);
+        console.log('EDITED item', title, data);
+        res.redirect(`/articles/${title}`);
       });
   })
   .delete((req, res) => {
-    let id = req.params.id;
+    let title = qs.stringify(req.params.title);
 
-    return articles.remove(id)
+    return articles.remove(title)
       .then((data) => {
-        console.log('DELETED item', id, { data });
+        console.log('DELETED item', title, { data });
         res.redirect('/articles');
       });
   });
 
 // handles directing a article to edit
-router.route('/:id/edit')
+router.route('/:title/edit')
   .get((req, res) => {
-    let id = req.params.id;
+    console.log(req.params.title);
+    let title = qs.stringify(req.params.title);
+    console.log(title);
 
-    return articles.find(id)
+    return articles.find(title)
       .then((data) => {
         res.render('partials/articles/edit', { data });
       });
