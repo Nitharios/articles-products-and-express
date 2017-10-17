@@ -28,15 +28,17 @@ class Products {
   }
 
   create(product) {
+    console.log(product);
+    // let id = Number(product.id);
     let name = product.name;
-    let price = product.price;
-    let inventory = product.inventory;
+    let price = Number(product.price);
+    let inventory = Number(product.inventory);
 
     if(!name || !price || !inventory) {
       throw new Error('Invalid Product');
     }
 
-    let query = 'INSERT INTO products VALUES($1, $2, $3)';
+    let query = 'INSERT INTO products (name, price, inventory) VALUES($1, $2, $3)';
     let params = [name, price, inventory];
     return db.any(query, params); 
   }

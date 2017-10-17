@@ -21,6 +21,7 @@ router.route('/new')
 .post((req, res) => {
   return products.create(req.body)
   .then((data) => {
+    console.log(data);
     res.json(data);
   });
 });
