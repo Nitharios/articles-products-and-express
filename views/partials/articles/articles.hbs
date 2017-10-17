@@ -11,9 +11,9 @@
 <ul>
   {{#each data}}
     <li>
-      <h4>Title: {{title}}, 
-      <br>Author: {{author}}, 
-      <br>Body: {{body}}, 
+      Title: {{title}}
+      <br>Author: {{author}}
+      <p>{{body}}
       <p><form action="/articles/{{id}}/edit" method="get">
         <input type="submit" value="EDIT"></p>
       </form>

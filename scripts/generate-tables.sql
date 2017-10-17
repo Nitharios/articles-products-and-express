@@ -21,7 +21,7 @@ CREATE TABLE articles(
   id          SERIAL        PRIMARY KEY,
   title       varchar(180)  NOT NULL,
   author      varchar(90)   NOT NULL,
-  body        varchar(255)  NOT NULL
+  body        text          NOT NULL
 );
 
 -- create indexes to make searching faster

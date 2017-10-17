@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const hbs = require('express-handlebars');
+const qs = require('querystring');
 
 const products = require('./routes/products');
 const articles = require('./routes/articles');
