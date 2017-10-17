@@ -65,7 +65,7 @@ router.route('/:title')
 router.route('/:title/edit')
   .get((req, res) => {
     console.log(req.params.title);
-    let title = qs.stringify(req.params.title);
+    let title = req.params.title;
     console.log(title);
 
     return articles.find(title)
