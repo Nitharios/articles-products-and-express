@@ -44,10 +44,10 @@ class Products {
     return db.any(query, params); 
   }
 
-  find(id) {
+  find(productId) {
     let query = `SELECT name, price, inventory
                  FROM products
-                 WHERE id = ${id}`;
+                 WHERE id = ${productId}`;
     return db.any(query);
   }
 
@@ -65,6 +65,12 @@ class Products {
     let query = `UPDATE products
                  SET 
                  WHERE id = ${productId}`;
+  }
+
+  remove(productId) {
+    let query = `DELETE FROM products
+                 WHERE id = ${productId}`;
+    return db.any(query);
   }
 }
 

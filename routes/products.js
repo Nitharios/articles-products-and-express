@@ -42,5 +42,14 @@ router.route('/:id')
     res.json(data);
   });
 })
+.delete((req, res) => {
+  let id = req.params.id;
+
+  return products.remove(id)
+  .then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
 
 module.exports = router;
