@@ -12,14 +12,14 @@ router.route('/')
     return products.listAll()
       .then((data) => {
         console.log(data);
-        res.render('partials/products', { data });
+        res.render('partials/products/products', { data });
       });
   });
 
 // handles adding a new product to table
 router.route('/new')
   .get((req, res) => {
-    res.render('partials/new');
+    res.render('partials/products/new');
   })
   .post((req, res) => {
     return products.create(req.body)
@@ -37,7 +37,7 @@ router.route('/:id')
     return products.find(id)
       .then((data) => {
         console.log('here', data);
-        res.render('partials/product', { data });
+        res.render('partials/products/product', { data });
       });
   })
   .put((req, res) => {
@@ -66,7 +66,7 @@ router.route('/:id/edit')
 
     return products.find(id)
       .then((data) => {
-        res.render('partials/edit', { data });
+        res.render('partials/products/edit', { data });
       });
   });
 
