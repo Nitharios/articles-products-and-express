@@ -1,72 +1,72 @@
 /* jshint esversion:6 */
 const express = require('express');
-const Products = require('../models/products');
+const Articles = require('../models/articles');
 
-const products = new Products();
+const articles = new Articles();
 const router = express.Router();
 
-// handles returning entire table of products
+// handles returning entire table of articles
 router.route('/')
   .get((req, res) => {
     // listAll will return a Promise
-    return products.listAll()
+    return articles.listAll()
       .then((data) => {
         // console.log(data);
-        res.render('partials/products/products', { data });
+        res.render('partials/articles/articles', { data });
       });
   });
 
-// handles adding a new product to table
+// handles adding a new article to table
 router.route('/new')
   .get((req, res) => {
-    res.render('partials/products/new');
+    res.render('partials/articles/new');
   })
   .post((req, res) => {
-    return products.create(req.body)
+    return articles.create(req.body)
       .then((data) => {
         console.log('CREATED', data);
-        res.redirect('/products');
+        res.redirect('/articles');
       });
   });
 
-// handles updating a product in the table
+// handles updating a article in the table
 router.route('/:id')
   .get((req, res) => {
     let id = req.params.id;
 
-    return products.find(id)
+    return articles.find(id)
       .then((data) => {
         // console.log('here', data);
-        res.render('partials/products/product', { data });
+        res.render('partials/articles/article', { data });
       });
   })
   .put((req, res) => {
     let id = req.params.id;
 
-    return products.edit(id, req.body)
+    return articles.edit(id, req.body)
       .then((data) => {
         console.log('EDITED item', id, data);
-        res.redirect(`/products/${id}`);
+        res.redirect(`/articles/${id}`);
       });
   })
   .delete((req, res) => {
     let id = req.params.id;
 
-    return products.remove(id)
+    return articles.remove(id)
       .then((data) => {
         console.log('DELETED item', id, { data });
-        res.redirect('/products');
+        res.redirect('/articles');
       });
   });
 
-// handles directing a product to edit
+// handles directing a article to edit
 router.route('/:id/edit')
   .get((req, res) => {
     let id = req.params.id;
 
-    return products.find(id)
+    return articles.find(id)
       .then((data) => {
-        res.render('partials/products/edit', { data });
+        res.render('partials/articles/edit', { data });
       });
   });
 

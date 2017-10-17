@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/products', products);
-// app.use('/articles', articles);
+app.use('/articles', articles);
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);

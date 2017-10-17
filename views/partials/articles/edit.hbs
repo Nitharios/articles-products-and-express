@@ -1,19 +1,18 @@
-<h1>Edit Product</h1>
+<h1>Edit Article</h1>
 
 {{#each data}}
 
-  <form action="/products/{{id}}?_method=PUT" method="POST">
-    <p>ID: <input type="text" name="id" value={{id}} disabled></p>
-    <p>Name: <input type="text" name="name" value="{{name}}"></p>
-    <p>Price: <input type="text" name="price" value="{{price}}"></p>
-    <p>Inventory: <input type="text" name="inventory" value="{{inventory}}"></p>
+  <form action="/articles/{{title}}?_method=PUT" method="POST">
+    <p>Title: <input type="text" name="title" value={{title}} disabled></p>
+    <p>Author: <input type="text" name="author" value="{{author}}"></p>
+    <p>Body: <input type="text" name="body" value="{{body}}"></p>
 
     <input type="submit" value="MAKE CHANGES">
   </form> 
 
-  <h1>Delete Product</h1>
-  <form action="/products/{{id}}?_method=DELETE" method="POST">
-    ID: <input type="text" name="name" value="{{id}}" disabled>
+  <h1>Delete Article</h1>
+  <form action="/articles/{{title}}?_method=DELETE" method="POST">
+    Title: <input type="text" name="author" value="{{title}}" disabled>
     <p><input type="submit" value="DELETE"></p>
   </form>
 

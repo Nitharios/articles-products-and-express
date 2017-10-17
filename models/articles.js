@@ -13,11 +13,11 @@ const connect = {
 
 const db = pgp(connect);
 
-class Products {
+class Articles {
 
   listAll() {
-    let query = `SELECT id, name, price, inventory 
-                 FROM products
+    let query = `SELECT id, title, author, body
+                 FROM articles
                  ORDER BY id ASC;`;
     
     return db.any(query)
@@ -26,32 +26,32 @@ class Products {
       });
   }
 
-  create(product) {
+  create(article) {
 
-    if(!product.name || !product.price || !product.inventory) {
-      throw new Error('Invalid Product');
+    if(!article.title || !article.author || !article.body) {
+      throw new Error('Invalid Article');
     }
 
-    let name = product.name;
-    let price = Number(product.price);
-    let inventory = Number(product.inventory);
-    let query = `INSERT INTO products (name, price, inventory)
+    let title = article.title;
+    let author = article.author;
+    let body = article.body;
+    let query = `INSERT INTO articles (title, author, body)
                  VALUES($1, $2, $3)`;
-    let params = [name, price, inventory];
+    let params = [title, author, body];
 
     return db.any(query, params)
       .then((data) => {
-        return product;
+        return article;
       })
       .catch((err) => {
         console.log(err);
       }); 
   }
 
-  find(productID) {
-    let query = `SELECT id, name, price, inventory
-                 FROM products
-                 WHERE id = ${productID}`;
+  find(articleID) {
+    let query = `SELECT id, title, author, body
+                 FROM articles
+                 WHERE id = ${articleID}`;
 
     return db.any(query)
       .catch((err) => {
@@ -59,39 +59,39 @@ class Products {
       });
   }
 
-  edit(productID, product) {
-    let query = `SELECT name, price, inventory 
-                 FROM products
-                 WHERE id = ${productID}`;
+  edit(articleID, article) {
+    let query = `SELECT title, author, body 
+                 FROM articles
+                 WHERE id = ${articleID}`;
 
     return db.any(query)
       .then((data) => {
-        if (product.name) {
-          db.any(`UPDATE products SET name = '${product.name}' WHERE id = ${productID}`);
+        if (article.title) {
+          db.any(`UPDATE articles SET title = '${article.title}' WHERE id = ${articleID}`);
         }
 
-        if (product.price) {
-          db.any(`UPDATE products SET price = '${product.price}' WHERE id = ${productID}`);
+        if (article.author) {
+          db.any(`UPDATE articles SET author = '${article.author}' WHERE id = ${articleID}`);
         }
 
-        if (product.inventory) {
-          db.any(`UPDATE products SET inventory = '${product.inventory}' WHERE id = ${productID}`);
+        if (article.body) {
+          db.any(`UPDATE articles SET body = '${article.body}' WHERE id = ${articleID}`);
         }
 
-        return this.find(productID);
+        return this.find(articleID);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  remove(productID) {
-    let query = `DELETE FROM products
-                 WHERE id = ${productID}`;
+  remove(articleID) {
+    let query = `DELETE FROM articles
+                 WHERE id = ${articleID}`;
 
     return db.any(query)
       .then((data) => {
-        return this.find(productID);
+        return this.find(articleID);
       })
       .catch((err) => {
         console.log(err);
@@ -99,4 +99,4 @@ class Products {
   }
 }
 
-module.exports = Products;
+module.exports = Articles;
