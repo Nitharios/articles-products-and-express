@@ -11,14 +11,15 @@ router.route('/')
     // listAll will return a Promise
     return products.listAll()
       .then((data) => {
-        res.json(data);
+        console.log(data);
+        res.render('partials/products', { data });
       });
   });
 
 // handles adding a new product to table
 router.route('/new')
   .get((req, res) => {
-    res.render('index');
+    res.render('partials/new');
   })
   .post((req, res) => {
     return products.create(req.body)
@@ -35,7 +36,7 @@ router.route('/:id')
 
     return products.find(id)
       .then((data) => {
-        res.json(data);
+        res.render('partials/product', { data });
       });
   })
   .put((req, res) => {
@@ -52,8 +53,19 @@ router.route('/:id')
 
     return products.remove(id)
       .then((data) => {
-        console.log('DELETED item', id, data);
+        console.log('DELETED item', id, { data });
         res.json(data);
+      });
+  });
+
+// handles directing a product to edit
+router.route('/:id/edit')
+  .get((req, res) => {
+    let id = req.params.id;
+
+    return products.find(id)
+      .then((data) => {
+        res.render('partials/edit', data);
       });
   });
 
