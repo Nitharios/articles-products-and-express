@@ -67,15 +67,15 @@ class Products {
     return db.any(query)
       .then((data) => {
         if (product.name) {
-          db.any(`UPDATE products SET name = ${product.name} WHERE id = ${productID}`);
+          db.any(`UPDATE products SET name = '${product.name}' WHERE id = ${productID}`);
         }
 
         if (product.price) {
-          db.any(`UPDATE products SET price = ${product.price} WHERE id = ${productID}`);
+          db.any(`UPDATE products SET price = '${product.price}' WHERE id = ${productID}`);
         }
 
         if (product.inventory) {
-          db.any(`UPDATE products SET inventory = ${product.inventory} WHERE id = ${productID}`);
+          db.any(`UPDATE products SET inventory = '${product.inventory}' WHERE id = ${productID}`);
         }
 
         return this.find(productID);
@@ -85,9 +85,9 @@ class Products {
       });
   }
 
-  remove(productId) {
+  remove(productID) {
     let query = `DELETE FROM products
-                 WHERE id = ${productId}`;
+                 WHERE id = ${productID}`;
 
     return db.any(query)
       .then((data) => {
