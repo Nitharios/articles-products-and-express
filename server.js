@@ -3,17 +3,33 @@ const sanity = "You're not crazy!";
 console.log(sanity);
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const hbs = require('express-handlebars');
+
 const products = require('./routes/products');
 const articles = require('./routes/articles');
+
 const port = process.env.PORT || 8888;
 
 const app = express();
 
+app.engine('.hbs', hbs({
+  defaultLayout : 'main',
+  extname : '.hbs'
+}));
+
+app.set('view engine', '.hbs');
+app.use(bodyParser.urlencoded({ "extended" : true }));
+
+app.use(methodOverride('_method'));
+
 app.get('/', (req, res) => {
-  res.json('Hello World!');
+  res.render('home');
 });
 
 app.use('/products', products);
+// app.use('/articles', articles);
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);
