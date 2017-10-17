@@ -11,7 +11,7 @@ router.route('/')
     // listAll will return a Promise
     return products.listAll()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.render('partials/products/products', { data });
       });
   });
@@ -36,7 +36,7 @@ router.route('/:id')
 
     return products.find(id)
       .then((data) => {
-        console.log('here', data);
+        // console.log('here', data);
         res.render('partials/products/product', { data });
       });
   })
