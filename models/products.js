@@ -16,7 +16,8 @@ const db = pgp(connect);
 class Products {
 
   listAll() {
-    let query = 'SELECT id, name, price, inventory FROM products;';
+    let query = `SELECT id, name, price, inventory 
+    FROM products;`;
     
     return db.any(query)
     .then((data) => {
@@ -29,7 +30,6 @@ class Products {
 
   create(product) {
     console.log(product);
-    // let id = Number(product.id);
     let name = product.name;
     let price = Number(product.price);
     let inventory = Number(product.inventory);
@@ -38,9 +38,33 @@ class Products {
       throw new Error('Invalid Product');
     }
 
-    let query = 'INSERT INTO products (name, price, inventory) VALUES($1, $2, $3)';
+    let query = `INSERT INTO products (name, price, inventory)
+                 VALUES($1, $2, $3)`;
     let params = [name, price, inventory];
     return db.any(query, params); 
+  }
+
+  find(id) {
+    let query = `SELECT name, price, inventory
+                 FROM products
+                 WHERE id = ${id}`;
+    return db.any(query);
+  }
+
+  edit(productId, product) {
+    console.log(product);
+    let name = product.name;
+    let price = Number(product.price);
+    let inventory = Number(product.inventory);
+    let setString = '';
+
+    if (name) setString += `name = ${name}`; 
+    if (price) setString += `price = ${price}`;
+    if (inventory) setString += `inventory = ${inventory}`; 
+
+    let query = `UPDATE products
+                 SET 
+                 WHERE id = ${productId}`;
   }
 }
 

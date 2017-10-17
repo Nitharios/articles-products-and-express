@@ -26,4 +26,21 @@ router.route('/new')
   });
 });
 
+router.route('/:id')
+.get((req, res) => {
+  let id = req.params.id;
+
+  return products.find(id)
+  .then((data) => {
+    res.json(data);
+  });
+})
+.put((req, res) => {
+  return products.edit(req.body)
+  .then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+})
+
 module.exports = router;

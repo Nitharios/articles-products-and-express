@@ -25,4 +25,5 @@ CREATE TABLE articles(
 );
 
 -- create indexes to make searching faster
+-- CREATE UNIQUE 
 CREATE UNIQUE INDEX author_idx ON articles(author);
