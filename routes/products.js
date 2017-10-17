@@ -46,7 +46,7 @@ router.route('/:id')
     return products.edit(id, req.body)
       .then((data) => {
         console.log('EDITED item', id, data);
-        res.redirect('/products/${id}');
+        res.redirect(`/products/${id}`);
       });
   })
   .delete((req, res) => {
