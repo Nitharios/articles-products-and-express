@@ -5,51 +5,55 @@ const router = express.Router();
 const Products = require('../models/products');
 const products = new Products();
 
+// handles returning entire table of products
 router.route('/')
-.get((req, res) => {
-  // listAll will return a Promise
-  return products.listAll()
-  .then((data) => {
-    res.json(data);
+  .get((req, res) => {
+    // listAll will return a Promise
+    return products.listAll()
+    .then((data) => {
+      res.json(data);
+    });
   });
-});
 
+// handles adding a new product to table
 router.route('/new')
-.get((req, res) => {
-  res.render('index');
-})
-.post((req, res) => {
-  return products.create(req.body)
-  .then((data) => {
-    console.log(data);
-    res.json(data);
+  .get((req, res) => {
+    res.render('index');
+  })
+  .post((req, res) => {
+    return products.create(req.body)
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    });
   });
-});
 
+// handles updating a product in the table
 router.route('/:id')
-.get((req, res) => {
-  let id = req.params.id;
+  .get((req, res) => {
+    let id = req.params.id;
 
-  return products.find(id)
-  .then((data) => {
-    res.json(data);
-  });
-})
-.put((req, res) => {
-  return products.edit(req.body)
-  .then((data) => {
-    console.log(data);
-    res.json(data);
-  });
-})
-.delete((req, res) => {
-  let id = req.params.id;
+    return products.find(id)
+    .then((data) => {
+      res.json(data);
+    });
+  })
+  .put((req, res) => {
+    let id = req.params.id;
 
-  return products.remove(id)
-  .then((data) => {
-    console.log(data);
-    res.json(data);
+    return products.edit(id, req.body)
+    .then((data) => {
+      res.json(data);
+    });
+  })
+  .delete((req, res) => {
+    let id = req.params.id;
+
+    return products.remove(id)
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    });
   });
-});
 
 module.exports = router;
