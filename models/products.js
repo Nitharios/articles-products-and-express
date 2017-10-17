@@ -20,40 +20,42 @@ class Products {
     FROM products;`;
     
     return db.any(query)
-    .catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   create(product) {
-    console.log(product);
-    let name = product.name;
-    let price = Number(product.price);
-    let inventory = Number(product.inventory);
 
-    if(!name || !price || !inventory) {
+    if(!product.name || !product.price || !product.inventory) {
       throw new Error('Invalid Product');
     }
 
+    let name = product.name;
+    let price = Number(product.price);
+    let inventory = Number(product.inventory);
     let query = `INSERT INTO products (name, price, inventory)
                  VALUES($1, $2, $3)`;
     let params = [name, price, inventory];
 
     return db.any(query, params)
-    .catch((err) => {
-      console.log(err);
-    }); 
+      .then((data) => {
+        return product;
+      })
+      .catch((err) => {
+        console.log(err);
+      }); 
   }
 
-  find(productId) {
+  find(productID) {
     let query = `SELECT name, price, inventory
                  FROM products
-                 WHERE id = ${productId}`;
+                 WHERE id = ${productID}`;
 
     return db.any(query)
-    .catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   edit(productID, product) {
@@ -62,22 +64,24 @@ class Products {
                  WHERE id = ${productID}`;
 
     return db.any(query)
-    .then((data) => {
-      if (product.name) {
-        db.any('UPDATE products SET name = $1 WHERE id = $2', [product.name, productID]);
-      }
+      .then((data) => {
+        if (product.name) {
+          db.any(`UPDATE products SET name = ${product.name} WHERE id = ${productID}`);
+        }
 
-      if (product.price) {
-        db.any('UPDATE products SET price = $1 WHERE id = $2', [product.price, productID]);
-      }
+        if (product.price) {
+          db.any(`UPDATE products SET price = ${product.price} WHERE id = ${productID}`);
+        }
 
-      if (product.inventory) {
-        db.any('UPDATE products SET inventory = $1 WHERE id = $2', [product.inventory, productID]);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+        if (product.inventory) {
+          db.any(`UPDATE products SET inventory = ${product.inventory} WHERE id = ${productID}`);
+        }
+
+        return this.find(productID);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   remove(productId) {
@@ -85,9 +89,12 @@ class Products {
                  WHERE id = ${productId}`;
 
     return db.any(query)
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((data) => {
+        return this.find(productID);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 

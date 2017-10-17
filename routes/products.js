@@ -10,9 +10,9 @@ router.route('/')
   .get((req, res) => {
     // listAll will return a Promise
     return products.listAll()
-    .then((data) => {
-      res.json(data);
-    });
+      .then((data) => {
+        res.json(data);
+      });
   });
 
 // handles adding a new product to table
@@ -22,10 +22,10 @@ router.route('/new')
   })
   .post((req, res) => {
     return products.create(req.body)
-    .then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+      .then((data) => {
+        console.log('CREATED', data);
+        res.json(data);
+      });
   });
 
 // handles updating a product in the table
@@ -34,26 +34,27 @@ router.route('/:id')
     let id = req.params.id;
 
     return products.find(id)
-    .then((data) => {
-      res.json(data);
-    });
+      .then((data) => {
+        res.json(data);
+      });
   })
   .put((req, res) => {
     let id = req.params.id;
 
     return products.edit(id, req.body)
-    .then((data) => {
-      res.json(data);
-    });
+      .then((data) => {
+        console.log('EDITED item', id, data);
+        res.json(data);
+      });
   })
   .delete((req, res) => {
     let id = req.params.id;
 
     return products.remove(id)
-    .then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+      .then((data) => {
+        console.log('DELETED item', id, data);
+        res.json(data);
+      });
   });
 
 module.exports = router;
