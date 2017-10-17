@@ -17,7 +17,8 @@ class Products {
 
   listAll() {
     let query = `SELECT id, name, price, inventory 
-    FROM products;`;
+                 FROM products
+                 ORDER BY id ASC;`;
     
     return db.any(query)
       .catch((err) => {
