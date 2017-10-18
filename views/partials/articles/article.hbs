@@ -6,7 +6,7 @@
   <br>Author: {{author}}
   <br>Body: {{body}}
 
-  <p><form action="/articles/{{id}}/edit" method="get"><input type="submit" value="EDIT"></p>
+  <p><form action="/articles/{{uri}}/edit" enctype="application/x-www-form-urlencoded" method="get"><input type="submit" value="EDIT"></p>
   </form>
 
 {{/each}}

@@ -1,5 +1,7 @@
 /* jshint esversion:6 */
 const pgp = require('pg-promise')();
+const fixedEncodeURI = require('../scripts/fixedEncodeURI');
+
 const port = 5432;
 // this data can go in another file and then be required in since Products AND Articles will use this
 const database = 'articles_and_products';
@@ -16,7 +18,7 @@ const db = pgp(connect);
 class Articles {
 
   listAll() {
-    let query = `SELECT id, title, author, body
+    let query = `SELECT id, title, author, body, uri
                  FROM articles
                  ORDER BY id ASC;`;
     
@@ -35,7 +37,7 @@ class Articles {
     let title = article.title;
     let author = article.author;
     let body = article.body;
-    let uri = encodeURI(article.title);
+    let uri = fixedEncodeURI(article.title);
 
     let query = `INSERT INTO articles (title, author, body, uri)
                  VALUES($1, $2, $3, $4)`;
@@ -50,53 +52,53 @@ class Articles {
       }); 
   }
 
-  find(articleTitle) {
-    let query = `SELECT id, title, author, body
+  find(articleURI) {
+    let query = `SELECT id, title, author, body, uri
                  FROM articles
-                 WHERE title = ${articleTitle}`;
+                 WHERE uri = '${articleURI}'`;
 
     return db.any(query)
       .catch((err) => {
-        console.log(err);
+        console.log('ERROR', err);
       });
   }
 
-  edit(articleTitle, article) {
+  edit(articleURI, article) {
     let query = `SELECT title, author, body, uri 
                  FROM articles
-                 WHERE title = ${articleTitle}`;
+                 WHERE uri = '${articleURI}'`;
 
     return db.any(query)
       .then((data) => {
         if (article.title) {
-          let uri = encodeURI(article.title);
+          let uri = fixedEncodeURI(article.title);
 
-          db.any(`UPDATE articles SET title = '${article.title}' WHERE title = ${articleTitle}`);
-          db.any(`UPDATE articles SET uri = '${uri}' WHERE title = ${articleTitle}`);
+          db.any(`UPDATE articles SET title = '${article.title}' WHERE uri = '${articleURI}'`);
+          db.any(`UPDATE articles SET uri = '${uri}' WHERE uri = '${articleURI}'`);
         }
 
         if (article.author) {
-          db.any(`UPDATE articles SET author = '${article.author}' WHERE title = ${articleTitle}`);
+          db.any(`UPDATE articles SET author = '${article.author}' WHERE uri = '${articleURI}'`);
         }
 
         if (article.body) {
-          db.any(`UPDATE articles SET body = '${article.body}' WHERE title = ${articleTitle}`);
+          db.any(`UPDATE articles SET body = '${article.body}' WHERE URI = '${articleURI}'`);
         }
 
-        return this.find(articleTitle);
+        return this.find(articleURI);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  remove(articleTitle) {
+  remove(articleURI) {
     let query = `DELETE FROM articles
-                 WHERE title = ${articleTitle}`;
+                 WHERE uri = '${articleURI}'`;
 
     return db.any(query)
       .then((data) => {
-        return this.find(articleTitle);
+        return this.find(articleURI);
       })
       .catch((err) => {
         console.log(err);

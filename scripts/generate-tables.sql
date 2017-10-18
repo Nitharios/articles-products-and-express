@@ -21,9 +21,11 @@ CREATE TABLE articles(
   id          SERIAL        PRIMARY KEY,
   title       varchar(180)  NOT NULL,
   author      varchar(90)   NOT NULL,
-  body        text          NOT NULL
+  body        text          NOT NULL,
+  uri         varchar(255)  NOT NULL
 );
 
 -- create indexes to make searching faster
 -- CREATE UNIQUE 
 CREATE UNIQUE INDEX author_idx ON articles(author);
+CREATE UNIQUE INDEX uri_idx ON articles(uri);

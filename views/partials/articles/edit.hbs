@@ -2,7 +2,7 @@
 
 {{#each data}}
 
-  <form action="/articles/{{title}}?_method=PUT" accept="utf-8" enctype="application/x-www-form-urlencoded" method="POST">
+  <form action="/articles/{{uri}}?_method=PUT" accept="utf-8" enctype="application/x-www-form-urlencoded" method="POST">
     <p>Title: <input type="text" name="title" value="{{title}}"></p>
     <p>Author: <input type="text" name="author" value="{{author}}"></p>
     <p>Body: <textarea name="body">{{body}}</textarea></p>
@@ -11,7 +11,7 @@
   </form> 
 
   <h1>Delete Article</h1>
-  <form action="/articles/{{title}}?_method=DELETE" method="POST">
+  <form action="/articles/{{uri}}?_method=DELETE" method="POST">
     Title: <input type="text" name="author" value="{{title}}" disabled>
     <p><input type="submit" value="DELETE"></p>
   </form>

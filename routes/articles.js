@@ -1,8 +1,8 @@
 /* jshint esversion:6 */
 const express = require('express');
-const Articles = require('../models/articles');
 
-const qs = require('querystring');
+const fixedEncodeURI = require('../scripts/fixedEncodeURI');
+const Articles = require('../models/articles');
 
 const articles = new Articles();
 const router = express.Router();
@@ -32,44 +32,44 @@ router.route('/new')
   });
 
 // handles updating a article in the table
-router.route('/:title')
+router.route('/:uri')
   .get((req, res) => {
-    let title = qs.stringify(req.params.title);
+    let uri = fixedEncodeURI(req.params.uri);
 
-    return articles.find(title)
+    return articles.find(uri)
       .then((data) => {
         // console.log('here', data);
         res.render('partials/articles/article', { data });
       });
   })
   .put((req, res) => {
-    let title = qs.stringify(req.params.title);
+    let uri = fixedEncodeURI(req.params.uri);
 
-    return articles.edit(title, req.body)
+    return articles.edit(uri, req.body)
       .then((data) => {
-        console.log('EDITED item', title, data);
-        res.redirect(`/articles/${title}`);
+        console.log('EDITED item', uri, data);
+        res.redirect(`/articles/${uri}`);
       });
   })
   .delete((req, res) => {
-    let title = qs.stringify(req.params.title);
+    let uri = fixedEncodeURI(req.params.uri);
 
-    return articles.remove(title)
+    return articles.remove(uri)
       .then((data) => {
-        console.log('DELETED item', title, { data });
+        console.log('DELETED item', uri, { data });
         res.redirect('/articles');
       });
   });
 
 // handles directing a article to edit
-router.route('/:title/edit')
+router.route('/:uri/edit')
   .get((req, res) => {
-    console.log(req.params.title);
-    let title = req.params.title;
-    console.log(title);
+    let uri = fixedEncodeURI(req.params.uri);
+    console.log(uri);
 
-    return articles.find(title)
+    return articles.find(`${uri}`)
       .then((data) => {
+        console.log('edit', data);
         res.render('partials/articles/edit', { data });
       });
   });
