@@ -47,7 +47,7 @@ router.route('/:uri')
 
     return articles.edit(uri, req.body)
       .then((data) => {
-        console.log('EDITED item', uri, data);
+        console.log('EDITED item', title, data);
         res.redirect(`/articles/${uri}`);
       });
   })
