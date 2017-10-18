@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ "extended" : true }));
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home', { "home" : true });
 });
 
 app.use('/products', products);

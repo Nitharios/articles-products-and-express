@@ -9,6 +9,15 @@
   <title>Articles and Products</title>
 </head>
 <body>
+  {{#unless home}}
+  
+    <form action="" method="get">
+      <input type="submit" formaction="/" value="Home">
+      <input type="submit" formaction="javascript:history.go(-1)" value="Back">
+    </form>
+
+  {{/unless}}
+
   {{{body}}}
 </body>
 </html>
