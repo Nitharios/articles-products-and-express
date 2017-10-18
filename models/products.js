@@ -25,10 +25,9 @@ class Products {
     let price = Number(product.price);
     let inventory = Number(product.inventory);
     let query = `INSERT INTO products (name, price, inventory)
-                 VALUES($1, $2, $3)`;
-    let params = [name, price, inventory];
-
-    return db.any(query, params)
+                 VALUES(${name}, ${price}, ${inventory})`;
+    // let params = [name, price, inventory];
+    return db.any(query)
       .then((data) => {
         return product;
       })
