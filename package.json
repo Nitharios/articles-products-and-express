@@ -12,9 +12,12 @@
     "pg-promise": "^7.0.2",
     "pgpromise": "^0.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --watch --bail",
     "start": "node server.js"
   },
   "repository": {
